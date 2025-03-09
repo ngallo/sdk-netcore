@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Permguard</Title>
+        <Authors>NitroAgiltiy SRL</Authors>
+        <Description>This Permguard SDK for C# and DoNet Core</Description>
+        <Copyright>Apache License 2.0</Copyright>
+        <PackageProjectUrl>www.permguard.com</PackageProjectUrl>
+        <PackageLicenseUrl>https://www.permguard.com/docs/0.0.x/legal-licenses/third-party-technologies/</PackageLicenseUrl>
+        <PackageIcon>symbol.png</PackageIcon>
+        <RepositoryUrl>https://github.com/permguard/permguard-netcore</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>0.1</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Protobuf Include="Grpc\pdp.proto" GrpcServices="Client" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Google.Protobuf" Version="3.30.0-rc2" />
+      <PackageReference Include="Grpc.Net.Client" Version="2.70.0-pre1" />
+      <PackageReference Include="Grpc.Tools" Version="2.70.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="symbol.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>
