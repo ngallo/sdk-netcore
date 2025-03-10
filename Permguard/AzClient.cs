@@ -4,24 +4,25 @@ using Grpc.Net.Client;
 
 namespace Permguard;
 
-public class PdpClient
+public class AzClient
 {
-    public string Url { get; set; }
+    public AzConfig Config { get; set; }
     
     public bool LogJsonRequest { get; set; }
     
-    public PdpClient(string url)
+    public AzClient(AzConfig config)
     {
-        this.Url = url;
+        this.Config = config;
     }
 
     public AZResponse CheckAuth(AZRequest request)
     {
-        if (string.IsNullOrEmpty(this.Url))
+        if (this.Config == null)
         {
-            throw new NullReferenceException("Please provide url");
+            throw new NullReferenceException("Please provide config");
         }
-        using var channel = GrpcChannel.ForAddress(this.Url);
+        string urlString = $"{this.Config.Endpoint.Schema}://{this.Config.Endpoint.Endpoint}:{this.Config.Endpoint.Port}";
+        using var channel = GrpcChannel.ForAddress(urlString);
         Policydecisionpoint.V1PDPService.V1PDPServiceClient client = new(channel);
         var destination = MapService.MapAZRequestToGrpcAuthorizationCheckRequest(request);
         if (this.LogJsonRequest)
