@@ -1,8 +1,8 @@
 ﻿using Permguard;
 using Permguard.AzReq;
 
-PdpClient client=new PdpClient("http://localhost:9094");
-var builder = new AZRequestBuilder(742774374902, "3cdfd72ea6404624aeabf7b7bf043d31").WithRequestID("123457");
+AzClient client = new AzClient(new AzConfig().WithEndpoint(new AzEndpoint("http", 9094, "localhost")));
+var builder = new AZRequestBuilder(882005116936, "711299b99c12416396d674c0ec371f1d").WithRequestID("123457");
 var listEntities = new List<Dictionary<string, object>>();
 var entityProps = new Dictionary<string,object>();
 var uidDict = new Dictionary<string,object>();
