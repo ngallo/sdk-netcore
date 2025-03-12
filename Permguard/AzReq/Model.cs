@@ -144,10 +144,10 @@ namespace Permguard.AzReq
         public string Id { get; set; }
 
         [JsonPropertyName("reason_admin")]
-        public ReasonResponse ReasonAdmin { get; set; }
+        public ReasonResponse? ReasonAdmin { get; set; }
 
         [JsonPropertyName("reason_user")]
-        public ReasonResponse ReasonUser { get; set; }
+        public ReasonResponse? ReasonUser { get; set; }
     }
 
     public class EvaluationResponse
@@ -159,7 +159,7 @@ namespace Permguard.AzReq
         public bool Decision { get; set; }
 
         [JsonPropertyName("context")]
-        public ContextResponse Context { get; set; }
+        public ContextResponse? Context { get; set; }
     }
 
     public class AZResponse
@@ -171,7 +171,7 @@ namespace Permguard.AzReq
         public bool Decision { get; set; }
 
         [JsonPropertyName("context")]
-        public ContextResponse Context { get; set; }
+        public ContextResponse? Context { get; set; }
 
         [JsonPropertyName("evaluations")]
         public List<EvaluationResponse> Evaluations { get; set; }

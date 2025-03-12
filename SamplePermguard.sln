@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamplePermguard", "SamplePermguard\SamplePermguard.csproj", "{357F1272-29F3-44B3-9D7C-E08AA2D0247F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleJsonPermguard", "SampleJsonPermguard\SampleJsonPermguard.csproj", "{357F1272-29F3-44B3-9D7C-E08AA2D0247F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Permguard", "Permguard\Permguard.csproj", "{0FBE66D2-F2E9-46BA-B5ED-7453928366B6}"
 EndProject
