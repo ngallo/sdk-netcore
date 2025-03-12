@@ -1,9 +1,4 @@
-using System.Text.RegularExpressions;
-using Policydecisionpoint;
-using Google.Protobuf.WellKnownTypes;
-using Permguard;
-using Permguard.Grpc;
-using Policydecisionpoint;
+
 
 namespace Permguard
 {
@@ -23,7 +18,7 @@ namespace Permguard
             };
         }
         
-        public static Policydecisionpoint.Principal MapPrincipalToGrpcPrincipal(Permguard.Principal principal)
+        public static Policydecisionpoint.Principal MapPrincipalToGrpcPrincipal(Principal principal)
         {
             if (principal == null)
             {
@@ -38,7 +33,7 @@ namespace Permguard
             };
         }
         
-        public static Policydecisionpoint.Entities MapEntitiesToGrpcEntities(Permguard.Entities entities)
+        public static Policydecisionpoint.Entities MapEntitiesToGrpcEntities(Entities entities)
         {
             if (entities == null)
             {
@@ -49,7 +44,7 @@ namespace Permguard
             {
                 Schema = entities.Schema
             };
-            var results = Permguard.Grpc.Converter.ToRepeatedField(entities.Items);
+            var results = Grpc.Converter.ToRepeatedField(entities.Items);
             foreach(var result in results)
             {
                 target.Items.Add(result);
@@ -58,7 +53,7 @@ namespace Permguard
             return target;
         }
 
-        public static Policydecisionpoint.Subject MapSubjectToGrpcSubject(Permguard.Subject subject)
+        public static Policydecisionpoint.Subject MapSubjectToGrpcSubject(Subject subject)
         {
             if (subject == null)
             {
@@ -70,13 +65,13 @@ namespace Permguard
                 ID = subject.ID,
                 Type = subject.Type,
                 Source = string.IsNullOrEmpty(subject.Source) ? null : subject.Source,
-                Properties = subject.Properties == null ? null : Permguard.Grpc.Converter.FromDictionary(subject.Properties)
+                Properties = subject.Properties == null ? null : Grpc.Converter.FromDictionary(subject.Properties)
             };
 
             return target;
         }
         
-        public static Policydecisionpoint.Resource MapResourceToGrpcResource(Permguard.Resource resource)
+        public static Policydecisionpoint.Resource MapResourceToGrpcResource(Resource resource)
         {
             if (resource == null)
             {
@@ -87,11 +82,11 @@ namespace Permguard
             {
                 ID = resource.ID,
                 Type = resource.Type,
-                Properties = resource.Properties == null ? null : Permguard.Grpc.Converter.FromDictionary(resource.Properties)
+                Properties = resource.Properties == null ? null : Grpc.Converter.FromDictionary(resource.Properties)
             };
         }
         
-        public static Policydecisionpoint.Action MapActionToGrpcAction(Permguard.Action action)
+        public static Policydecisionpoint.Action MapActionToGrpcAction(Action action)
         {
             if (action == null)
             {
@@ -101,11 +96,11 @@ namespace Permguard
             return new Policydecisionpoint.Action
             {
                 Name = action.Name,
-                Properties = Permguard.Grpc.Converter.FromDictionary(action.Properties)
+                Properties = Grpc.Converter.FromDictionary(action.Properties)
             };
         }
         
-        public static Policydecisionpoint.EvaluationRequest MapEvaluationToGrpcEvaluationRequest(Permguard.Evaluation evaluation)
+        public static Policydecisionpoint.EvaluationRequest MapEvaluationToGrpcEvaluationRequest(Evaluation evaluation)
         {
             if (evaluation == null)
             {
@@ -118,13 +113,13 @@ namespace Permguard
                 Subject = evaluation.Subject == null ? null : MapSubjectToGrpcSubject(evaluation.Subject),
                 Resource = evaluation.Resource == null ? null : MapResourceToGrpcResource(evaluation.Resource),
                 Action = evaluation.Action == null ? null : MapActionToGrpcAction(evaluation.Action),
-                Context = evaluation.Context == null ? null : Permguard.Grpc.Converter.FromDictionary(evaluation.Context)
+                Context = evaluation.Context == null ? null : Grpc.Converter.FromDictionary(evaluation.Context)
             };
 
             return target;
         }
         
-        public static Policydecisionpoint.AuthorizationModelRequest MapAuthZModelToGrpcAuthorizationModelRequest(Permguard.AZModel azModel)
+        public static Policydecisionpoint.AuthorizationModelRequest MapAuthZModelToGrpcAuthorizationModelRequest(AZModel azModel)
         {
             var req = new Policydecisionpoint.AuthorizationModelRequest()
             {
@@ -149,14 +144,14 @@ namespace Permguard
             return req;
         }
         
-        public static AuthorizationCheckRequest MapAZRequestToGrpcAuthorizationCheckRequest(Permguard.AZRequest azRequest)
+        public static Policydecisionpoint.AuthorizationCheckRequest MapAZRequestToGrpcAuthorizationCheckRequest(AZRequest azRequest)
         {
             if (azRequest == null)
             {
                 return null;
             }
 
-            var req = new AuthorizationCheckRequest
+            var req = new Policydecisionpoint.AuthorizationCheckRequest
             {
                 RequestID = azRequest.RequestID
             };
@@ -183,7 +178,7 @@ namespace Permguard
 
             if (azRequest.Context != null)
             {
-                req.Context = Permguard.Grpc.Converter.FromDictionary(azRequest.Context);
+                req.Context = Grpc.Converter.FromDictionary(azRequest.Context);
             }
 
             if (azRequest.Evaluations != null)
@@ -194,28 +189,28 @@ namespace Permguard
             return req;
         }
         
-        public static Permguard.ReasonResponse MapGrpcReasonResponseToReasonResponse(Policydecisionpoint.ReasonResponse reasonResponse)
+        public static ReasonResponse MapGrpcReasonResponseToReasonResponse(Policydecisionpoint.ReasonResponse reasonResponse)
         {
             if (reasonResponse == null)
             {
                 return null;
             }
 
-            return new Permguard.ReasonResponse
+            return new ReasonResponse
             {
                 Code = reasonResponse.Code,
                 Message = reasonResponse.Message
             };
         }
         
-        public static Permguard.ContextResponse MapGrpcContextResponseToContextResponse(Policydecisionpoint.ContextResponse contextResponse)
+        public static ContextResponse MapGrpcContextResponseToContextResponse(Policydecisionpoint.ContextResponse contextResponse)
         {
             if (contextResponse == null)
             {
                 return null;
             }
 
-            var target = new Permguard.ContextResponse
+            var target = new ContextResponse
             {
                 ID = contextResponse.ID,
                 ReasonAdmin = contextResponse.ReasonAdmin == null ? null : MapGrpcReasonResponseToReasonResponse(contextResponse.ReasonAdmin),
@@ -225,14 +220,14 @@ namespace Permguard
             return target;
         }
         
-        public static Permguard.EvaluationResponse MapGrpcEvaluationResponseToEvaluationResponse(Policydecisionpoint.EvaluationResponse evaluationResponse)
+        public static EvaluationResponse MapGrpcEvaluationResponseToEvaluationResponse(Policydecisionpoint.EvaluationResponse evaluationResponse)
         {
             if (evaluationResponse == null)
             {
                 return null;
             }
 
-            var target = new Permguard.EvaluationResponse
+            var target = new EvaluationResponse
             {
                 Decision = evaluationResponse.Decision,
                 RequestID = evaluationResponse.RequestID ?? ""
@@ -246,7 +241,7 @@ namespace Permguard
             return target;
         }
         
-        public static AZResponse MapGrpcAuthorizationCheckResponseToAZResponse(AuthorizationCheckResponse response)
+        public static AZResponse MapGrpcAuthorizationCheckResponseToAZResponse(Policydecisionpoint.AuthorizationCheckResponse response)
         {
             if (response == null)
             {
