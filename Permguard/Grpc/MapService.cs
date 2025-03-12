@@ -1,6 +1,8 @@
 
 
-namespace Permguard
+using Permguard.AzReq;
+
+namespace Permguard.Grpc
 {
     public class MapService
     {
@@ -13,7 +15,7 @@ namespace Permguard
 
             return new Policydecisionpoint.PolicyStore
             {
-                ID = policyStore.ID,
+                Id = policyStore.Id,
                 Kind = policyStore.Kind
             };
         }
@@ -27,7 +29,7 @@ namespace Permguard
 
             return new Policydecisionpoint.Principal
             {
-                ID = principal.ID,
+                Id = principal.Id,
                 Type = principal.Type,
                 Source = string.IsNullOrEmpty(principal.Source) ? null : principal.Source
             };
@@ -62,7 +64,7 @@ namespace Permguard
 
             var target = new Policydecisionpoint.Subject
             {
-                ID = subject.ID,
+                Id = subject.Id,
                 Type = subject.Type,
                 Source = string.IsNullOrEmpty(subject.Source) ? null : subject.Source,
                 Properties = subject.Properties == null ? null : Grpc.Converter.FromDictionary(subject.Properties)
@@ -80,13 +82,13 @@ namespace Permguard
 
             return new Policydecisionpoint.Resource
             {
-                ID = resource.ID,
+                Id = resource.Id,
                 Type = resource.Type,
                 Properties = resource.Properties == null ? null : Grpc.Converter.FromDictionary(resource.Properties)
             };
         }
         
-        public static Policydecisionpoint.Action MapActionToGrpcAction(Action action)
+        public static Policydecisionpoint.Action MapActionToGrpcAction(Permguard.AzReq.Action action)
         {
             if (action == null)
             {
@@ -109,7 +111,7 @@ namespace Permguard
 
             var target = new Policydecisionpoint.EvaluationRequest
             {
-                RequestID = evaluation.RequestID,
+                RequestId = evaluation.RequestId,
                 Subject = evaluation.Subject == null ? null : MapSubjectToGrpcSubject(evaluation.Subject),
                 Resource = evaluation.Resource == null ? null : MapResourceToGrpcResource(evaluation.Resource),
                 Action = evaluation.Action == null ? null : MapActionToGrpcAction(evaluation.Action),
@@ -123,7 +125,7 @@ namespace Permguard
         {
             var req = new Policydecisionpoint.AuthorizationModelRequest()
             {
-                ZoneID = azModel.ZoneID
+                ZoneId = azModel.ZoneId
             };
 
             if (azModel.PolicyStore != null)
@@ -153,7 +155,7 @@ namespace Permguard
 
             var req = new Policydecisionpoint.AuthorizationCheckRequest
             {
-                RequestID = azRequest.RequestID
+                RequestId = azRequest.RequestId
             };
 
             if (azRequest.AuthorizationModel != null)
@@ -212,7 +214,7 @@ namespace Permguard
 
             var target = new ContextResponse
             {
-                ID = contextResponse.ID,
+                Id = contextResponse.Id,
                 ReasonAdmin = contextResponse.ReasonAdmin == null ? null : MapGrpcReasonResponseToReasonResponse(contextResponse.ReasonAdmin),
                 ReasonUser = contextResponse.ReasonUser == null ? null : MapGrpcReasonResponseToReasonResponse(contextResponse.ReasonUser)
             };
@@ -230,7 +232,7 @@ namespace Permguard
             var target = new EvaluationResponse
             {
                 Decision = evaluationResponse.Decision,
-                RequestID = evaluationResponse.RequestID ?? ""
+                RequestId = evaluationResponse.RequestId ?? ""
             };
 
             if (evaluationResponse.Context != null)
@@ -251,7 +253,7 @@ namespace Permguard
             var target = new AZResponse
             {
                 Decision = response.Decision,
-                RequestID = response.RequestID ?? ""
+                RequestId = response.RequestId ?? ""
             };
 
             if (response.Context != null)

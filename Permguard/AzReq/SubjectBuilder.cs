@@ -29,12 +29,12 @@ namespace Permguard.AzReq
     {
         private Subject subject;
 
-        // Constructor to initialize SubjectBuilder with an ID
+        // Constructor to initialize SubjectBuilder with an Id
         public SubjectBuilder(string id)
         {
             subject = new Subject
             {
-                ID = id,
+                Id = id,
                 Type = SubjectDefault.Type
             };
             subject.Properties = new Dictionary<string, object>();
@@ -62,11 +62,11 @@ namespace Permguard.AzReq
         }
 
         // Build constructs and returns the final Subject object.
-        public Permguard.Subject Build()
+        public Subject Build()
         {
             var instance = new Subject
             {
-                ID = subject.ID,
+                Id = subject.Id,
                 Type = subject.Type,
                 Source = subject.Source,
                 Properties = DeepCopy(subject.Properties)

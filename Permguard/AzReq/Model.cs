@@ -2,7 +2,7 @@ using System;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
-namespace Permguard
+namespace Permguard.AzReq
 {
     public class PolicyStore
     {
@@ -10,7 +10,7 @@ namespace Permguard
         public string Kind { get; set; }
 
         [JsonPropertyName("id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
     }
 
     public class Entities
@@ -25,13 +25,13 @@ namespace Permguard
     public class Evaluation
     {
         [JsonPropertyName("request_id")]
-        public string RequestID { get; set; }
+        public string RequestId { get; set; }
 
         [JsonPropertyName("subject")]
         public Subject Subject { get; set; }
 
         [JsonPropertyName("resource")]
-        public Permguard.Resource Resource { get; set; }
+        public Resource Resource { get; set; }
 
         [JsonPropertyName("action")]
         public Action Action { get; set; }
@@ -43,7 +43,7 @@ namespace Permguard
     public class AZModel
     {
         [JsonPropertyName("zone_id")]
-        public long ZoneID { get; set; }
+        public long ZoneId { get; set; }
 
         [JsonPropertyName("principal")]
         public Principal Principal { get; set; }
@@ -62,7 +62,7 @@ namespace Permguard
         public AZModel AuthorizationModel { get; set; }
 
         [JsonPropertyName("request_id")]
-        public string RequestID { get; set; }
+        public string RequestId { get; set; }
 
         [JsonPropertyName("subject")]
         public Subject Subject { get; set; }
@@ -87,7 +87,7 @@ namespace Permguard
         public string Type { get; set; }
 
         [JsonPropertyName("id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("source")]
         public string Source { get; set; }
@@ -99,7 +99,7 @@ namespace Permguard
         public string Type { get; set; }
 
         [JsonPropertyName("id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("source")]
         public string Source { get; set; }
@@ -114,7 +114,7 @@ namespace Permguard
         public string Type { get; set; }
 
         [JsonPropertyName("id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("properties")]
         public Dictionary<string, object>? Properties { get; set; }
@@ -141,7 +141,7 @@ namespace Permguard
     public class ContextResponse
     {
         [JsonPropertyName("id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("reason_admin")]
         public ReasonResponse ReasonAdmin { get; set; }
@@ -153,7 +153,7 @@ namespace Permguard
     public class EvaluationResponse
     {
         [JsonPropertyName("request_id")]
-        public string RequestID { get; set; }
+        public string RequestId { get; set; }
 
         [JsonPropertyName("decision")]
         public bool Decision { get; set; }
@@ -165,7 +165,7 @@ namespace Permguard
     public class AZResponse
     {
         [JsonPropertyName("request_id")]
-        public string RequestID { get; set; }
+        public string RequestId { get; set; }
 
         [JsonPropertyName("decision")]
         public bool Decision { get; set; }

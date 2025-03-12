@@ -22,19 +22,19 @@ namespace Permguard.AzReq
     // AZAtomicRequestBuilder is the builder for the AZAtomicRequest object.
     public class AZAtomicRequestBuilder
     {
-        private string requestID;
-        private Permguard.Principal principal;
-        private Permguard.AzReq.SubjectBuilder azSubjectBuilder;
-        private Permguard.AzReq.ResourceBuilder azResourceBuilder;
-        private Permguard.AzReq.ActionBuilder azActionBuilder;
-        private Permguard.AzReq.ContextBuilder azContextBuilder;
-        private Permguard.AzReq.AZRequestBuilder azRequestBuilder;
+        private string requestId;
+        private Principal principal;
+        private readonly SubjectBuilder azSubjectBuilder;
+        private readonly ResourceBuilder azResourceBuilder;
+        private readonly ActionBuilder azActionBuilder;
+        private readonly ContextBuilder azContextBuilder;
+        private readonly AZRequestBuilder azRequestBuilder;
 
         // Constructor
-        public AZAtomicRequestBuilder(long zoneID, string ledgerID, string subjectID, string resourceKind, string actionName)
+        public AZAtomicRequestBuilder(long zoneId, string ledgerId, string subjectId, string resourceKind, string actionName)
         {
-            azRequestBuilder = new AZRequestBuilder(zoneID, ledgerID);
-            azSubjectBuilder = new SubjectBuilder(subjectID);
+            azRequestBuilder = new AZRequestBuilder(zoneId, ledgerId);
+            azSubjectBuilder = new SubjectBuilder(subjectId);
             azResourceBuilder = new ResourceBuilder(resourceKind);
             azActionBuilder = new ActionBuilder(actionName);
             azContextBuilder = new ContextBuilder();
@@ -54,10 +54,10 @@ namespace Permguard.AzReq
             return this;
         }
 
-        // WithRequestID sets the ID of the AZRequest.
-        public AZAtomicRequestBuilder WithRequestID(string requestID)
+        // WithRequestId sets the Id of the AZRequest.
+        public AZAtomicRequestBuilder WithRequestId(string requestId)
         {
-            this.requestID = requestID;
+            this.requestId = requestId;
             return this;
         }
 
@@ -89,10 +89,10 @@ namespace Permguard.AzReq
             return this;
         }
 
-        // WithResourceID sets the ID of the resource for the AZRequest.
-        public AZAtomicRequestBuilder WithResourceID(string id)
+        // WithResourceId sets the Id of the resource for the AZRequest.
+        public AZAtomicRequestBuilder WithResourceId(string id)
         {
-            azResourceBuilder.WithID(id);
+            azResourceBuilder.WithId(id);
             return this;
         }
 
@@ -127,7 +127,7 @@ namespace Permguard.AzReq
 
             azRequestBuilder
                 .WithPrincipal(principal)
-                .WithRequestID(requestID)
+                .WithRequestId(requestId)
                 .WithSubject(subject)
                 .WithResource(resource)
                 .WithAction(action)

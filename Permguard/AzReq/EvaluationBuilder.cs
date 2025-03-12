@@ -39,10 +39,10 @@ namespace Permguard.AzReq
             };
         }
 
-        // WithRequestID sets the request ID of the Evaluation.
-        public EvaluationBuilder WithRequestID(string requestID)
+        // WithRequestId sets the request Id of the Evaluation.
+        public EvaluationBuilder WithRequestId(string requestId)
         {
-            azEvaluation.RequestID = requestID;
+            azEvaluation.RequestId = requestId;
             return this;
         }
 
@@ -61,7 +61,7 @@ namespace Permguard.AzReq
                 Subject = azEvaluation.Subject,
                 Resource = azEvaluation.Resource,
                 Action = azEvaluation.Action,
-                RequestID = azEvaluation.RequestID,
+                RequestId = azEvaluation.RequestId,
                 Context = DeepCopy(azEvaluation.Context)
             };
             return instance;

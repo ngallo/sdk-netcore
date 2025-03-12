@@ -5,7 +5,7 @@ using Permguard.AzReq;
 //Create client
 AzClient client = new AzClient(new AzConfig().WithEndpoint(new AzEndpoint("http", 9094, "localhost")));
 //Create request
-var builder = new AZRequestBuilder(882005116936, "711299b99c12416396d674c0ec371f1d").WithRequestID("123457");
+var builder = new AZRequestBuilder(882005116936, "711299b99c12416396d674c0ec371f1d").WithRequestId("123457");
 var listEntities = new List<Dictionary<string, object>>();
 var entityProps = new Dictionary<string,object>();
 var uidDict = new Dictionary<string,object>();
@@ -25,7 +25,7 @@ context.Add("isSubscriptionActive", true);
 builder.WithPrincipal(new PrincipalBuilder("amy.smith@acmecorp.com").WithSource("keycloak").WithKind("user").Build())
     .WithAction(new ActionBuilder("MagicFarmacia::Platform::Action::create").WithProperty("isEnabled", true).Build())
     .WithSubject(new SubjectBuilder("platform-creator").WithSource("keycloak").WithKind("role-actor").WithProperty("isSuperUser", true).Build())
-    .WithResource(new ResourceBuilder("MagicFarmacia::Platform::Subscription").WithID("e3a786fd07e24bfa95ba4341d3695ae8").WithProperty("isEnabled", true).Build())
+    .WithResource(new ResourceBuilder("MagicFarmacia::Platform::Subscription").WithId("e3a786fd07e24bfa95ba4341d3695ae8").WithProperty("isEnabled", true).Build())
     .WithEntitiesMap("cedar", listEntities).WithContext(context);
 try
 {
@@ -35,7 +35,6 @@ try
     Stopwatch stopwatch = new Stopwatch();
     var response1 = client.CheckAuth(request);
     stopwatch.Start();
-    client.LogJsonRequest = true;
     var response = client.CheckAuth(request);
     stopwatch.Stop();
     Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");

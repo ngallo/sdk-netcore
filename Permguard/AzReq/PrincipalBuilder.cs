@@ -20,14 +20,14 @@ namespace Permguard.AzReq
 {
     public class PrincipalBuilder
     {
-        private Permguard.Principal principal;
+        private Principal principal;
 
-        // Constructor to initialize PrincipalBuilder with an ID.
+        // Constructor to initialize PrincipalBuilder with an Id.
         public PrincipalBuilder(string id)
         {
-            principal = new Permguard.Principal
+            principal = new Principal
             {
-                ID = id,
+                Id = id,
                 Type = "user" // Default type (PrincipalDefaultKind)
             };
         }
@@ -47,11 +47,11 @@ namespace Permguard.AzReq
         }
 
         // Build constructs and returns the final Principal object.
-        public Permguard.Principal Build()
+        public Principal Build()
         {
-            var instance = new Permguard.Principal
+            var instance = new Principal
             {
-                ID = principal.ID,
+                Id = principal.Id,
                 Type = principal.Type,
                 Source = principal.Source
             };

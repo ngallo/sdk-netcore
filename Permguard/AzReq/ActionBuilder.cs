@@ -23,12 +23,12 @@ namespace Permguard.AzReq
     // ActionBuilder is the builder for the action object.
     public class ActionBuilder
     {
-        private Permguard.Action action;
+        private Action action;
 
         // Constructor to initialize ActionBuilder with a name.
         public ActionBuilder(string name)
         {
-            action = new Permguard.Action
+            action = new Action
             {
                 Name = name
             };
@@ -43,9 +43,9 @@ namespace Permguard.AzReq
         }
 
         // Build constructs and returns the final Action object.
-        public Permguard.Action Build()
+        public Action Build()
         {
-            var instance = new Permguard.Action
+            var instance = new Action
             {
                 Name = action.Name,
                 Properties = DeepCopy(action.Properties)
@@ -54,15 +54,13 @@ namespace Permguard.AzReq
         }
 
         // Helper method to deep copy the properties dictionary.
-        private Dictionary<string,object> DeepCopy(Dictionary<string,object> source)
+        private Dictionary<string,object> DeepCopy(Dictionary<string, object>? source)
         {
             var copy = new Dictionary<string,object>();
-            if (source != null)
+            if (source == null) return copy;
+            foreach (var key in source.Keys)
             {
-                foreach (var key in source.Keys)
-                {
-                    copy[key] = source[key]; 
-                }
+                copy[key] = source[key]; 
             }
             return copy;
         }

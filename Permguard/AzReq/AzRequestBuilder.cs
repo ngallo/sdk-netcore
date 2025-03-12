@@ -24,7 +24,7 @@ namespace Permguard.AzReq
 {
     public class AZRequestBuilder
     {
-        private Permguard.AZRequest azRequest;
+        private AZRequest azRequest;
 
         // Constructor to initialize AZRequestBuilder with provided values.
         public AZRequestBuilder(long zoneId, string ledgerId)
@@ -33,13 +33,13 @@ namespace Permguard.AzReq
             {
                 AuthorizationModel = new AZModel
                 {
-                    ZoneID = zoneId,
-                    PolicyStore = new Permguard.PolicyStore
+                    ZoneId = zoneId,
+                    PolicyStore = new PolicyStore
                     {
                         Kind = "ledger", 
-                        ID = ledgerId
+                        Id = ledgerId
                     },
-                    Entities = new Permguard.Entities
+                    Entities = new Entities
                     {
                         Schema = "",
                         Items = new List<Dictionary<string, object>>()
@@ -50,35 +50,35 @@ namespace Permguard.AzReq
         }
 
         // WithPrincipal sets the principal of the AZRequest.
-        public AZRequestBuilder WithPrincipal(Permguard.Principal principal)
+        public AZRequestBuilder WithPrincipal(Principal principal)
         {
             azRequest.AuthorizationModel.Principal = principal;
             return this;
         }
 
-        // WithRequestID sets the request ID of the AZRequest.
-        public AZRequestBuilder WithRequestID(string requestID)
+        // WithRequestId sets the request Id of the AZRequest.
+        public AZRequestBuilder WithRequestId(string requestId)
         {
-            azRequest.RequestID = requestID;
+            azRequest.RequestId = requestId;
             return this;
         }
 
         // WithSubject sets the subject of the AZRequest.
-        public AZRequestBuilder WithSubject(Permguard.Subject subject)
+        public AZRequestBuilder WithSubject(Subject subject)
         {
             azRequest.Subject = subject;
             return this;
         }
 
         // WithResource sets the resource of the AZRequest.
-        public AZRequestBuilder WithResource(Permguard.Resource resource)
+        public AZRequestBuilder WithResource(Resource resource)
         {
             azRequest.Resource = resource;
             return this;
         }
 
         // WithAction sets the action of the AZRequest.
-        public AZRequestBuilder WithAction(Permguard.Action action)
+        public AZRequestBuilder WithAction(Action action)
         {
             azRequest.Action = action;
             return this;
@@ -112,7 +112,7 @@ namespace Permguard.AzReq
         }
 
         // WithEvaluation adds an evaluation to the AZRequest.
-        public AZRequestBuilder WithEvaluation(Permguard.Evaluation evaluation)
+        public AZRequestBuilder WithEvaluation(Evaluation evaluation)
         {
             azRequest.Evaluations.Add(evaluation);
             return this;
