@@ -16,6 +16,7 @@
         <RepositoryUrl>https://github.com/permguard/permguard-netcore</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>0.1</PackageTags>
+        <PackageReadmeFile>../README.md</PackageReadmeFile>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
