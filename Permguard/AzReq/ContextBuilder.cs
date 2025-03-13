@@ -17,7 +17,7 @@
 namespace Permguard.AzReq
 {
     // ContextBuilder is the builder for the context object.
-    public class ContextBuilder
+    public class ContextBuilder: Builder
     {
         private readonly Dictionary<string, object> context = new();
 
@@ -33,17 +33,6 @@ namespace Permguard.AzReq
         {
             var instance = DeepCopy(context);
             return instance;
-        }
-
-        // Helper method to deep copy the dictionary.
-        private static Dictionary<string, object> DeepCopy(Dictionary<string, object> source)
-        {
-            var copy = new Dictionary<string, object>();
-            foreach (var kvp in source)
-            {
-                copy[kvp.Key] = kvp.Value; // Assumes the values are primitives or deep copies themselves.
-            }
-            return copy;
         }
     }
 }

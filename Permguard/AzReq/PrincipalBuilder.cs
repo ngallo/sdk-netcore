@@ -16,7 +16,7 @@
 
 namespace Permguard.AzReq
 {
-    public class PrincipalBuilder
+    public class PrincipalBuilder: Builder
     {
         private readonly Principal principal;
 

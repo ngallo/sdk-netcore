@@ -16,7 +16,7 @@
 
 namespace Permguard.AzReq
 {
-    public class AzRequestBuilder
+    public class AzRequestBuilder: Builder
     {
         private readonly AzRequest? azRequest;
 

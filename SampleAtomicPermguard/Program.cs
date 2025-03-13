@@ -75,7 +75,7 @@ try
     if (response == null)
     {
         Console.WriteLine("❌ Failed to check auth.");
-        throw new Exception($"Failed to check auth response");
+        throw new Exception("Failed to check auth response");
     }
     if (response.Decision) {
         Console.WriteLine("✅ Authorization Permitted");

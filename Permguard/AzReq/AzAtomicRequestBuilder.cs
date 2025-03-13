@@ -17,7 +17,7 @@
 namespace Permguard.AzReq
 {
     // AzAtomicRequestBuilder is the builder for the AzAtomicRequest object.
-    public class AzAtomicRequestBuilder
+    public class AzAtomicRequestBuilder: Builder
     {
         private string? requestId;
         private Principal? principal;
@@ -28,7 +28,8 @@ namespace Permguard.AzReq
         private readonly AzRequestBuilder azRequestBuilder;
 
         // Constructor
-        public AzAtomicRequestBuilder(long zoneId, string ledgerId, string subjectId, string resourceKind, string actionName)
+        public AzAtomicRequestBuilder(long zoneId, string ledgerId, string subjectId, string resourceKind,
+            string actionName)
         {
             azRequestBuilder = new AzRequestBuilder(zoneId, ledgerId);
             azSubjectBuilder = new SubjectBuilder(subjectId);

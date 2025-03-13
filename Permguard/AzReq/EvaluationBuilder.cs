@@ -22,7 +22,7 @@ namespace Permguard.AzReq
     
 
     // EvaluationBuilder is the builder for the Evaluation object.
-    public class EvaluationBuilder
+    public class EvaluationBuilder: Builder
     {
         private readonly Evaluation azEvaluation;
         
@@ -62,22 +62,6 @@ namespace Permguard.AzReq
                 Context = DeepCopy(azEvaluation.Context)
             };
             return instance;
-        }
-
-        // Helper method to deep copy the context dictionary.
-        private Dictionary<string, object>? DeepCopy(Dictionary<string, object>? source)
-        {
-            if (source == null)
-            {
-                return null;
-            }
-
-            var copy = new Dictionary<string, object>();
-            foreach (var kvp in source)
-            {
-                copy[kvp.Key] = Value.ForString(kvp.Value.ToString()); // Assumes the values are primitives or deep copies themselves.
-            }
-            return copy;
         }
     }
 }

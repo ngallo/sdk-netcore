@@ -17,7 +17,7 @@
 namespace Permguard.AzReq
 {
     // ResourceBuilder is the builder for the resource object.
-    public class ResourceBuilder
+    public class ResourceBuilder: Builder
     {
         private readonly Resource resource;
 
@@ -55,18 +55,6 @@ namespace Permguard.AzReq
                 Properties = DeepCopy(resource.Properties)
             };
             return instance;
-        }
-
-        // Helper method to deep copy the properties dictionary.
-        private static Dictionary<string, object> DeepCopy(Dictionary<string, object>? source)
-        {
-            if (source == null) return new Dictionary<string, object>();
-            var copy = new Dictionary<string, object>();
-            foreach (var key in source.Keys)
-            {
-                copy[key] = source[key];
-            }
-            return copy;
         }
     }
 }
