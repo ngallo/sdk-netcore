@@ -56,4 +56,4 @@ jobs:
         run: dotnet pack ${{ env.PROJECT_PATH }} -p:PackageVersion=${{ env.PACKAGE_VERSION }} -p:PackageVersion=${{ env.PACKAGE_VERSION }} --no-restore --no-build --configuration Release --include-symbols --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
       - name:  "Push package"
-        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/<Solution Name>.${{ env.PACKAGE_VERSION }}.nupkg -s ${{ env.NUGET_SOURCE_URL }} -k ${{ secrets.NUGET_AUTH_TOKEN }}
+        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/Permguard.${{ env.PACKAGE_VERSION }}.nupkg -s ${{ env.NUGET_SOURCE_URL }} -k ${{ secrets.NUGET_AUTH_TOKEN }}
