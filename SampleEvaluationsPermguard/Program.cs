@@ -32,24 +32,24 @@ try
     var actionCreate = new ActionBuilder("MagicFarmacia::Platform::Action::create")
         .WithProperty("isEnabled", false)
         .Build();
+    
+    // Create a new Context
+    var context = new ContextBuilder()
+        .WithProperty("time", "2025-01-23T16:17:46+00:00")
+        .WithProperty("isSubscriptionActive", true)
+        .Build();
   
     // Create evaluations
-    var evaluationView=new Evaluation
-    {
-        RequestId = "134",
-        Resource = resource,
-        Action = actionView
-    };
-
-    var evaluationCreate=new Evaluation
-    {
-        RequestId = "435",
-        Resource = resource,
-        Action = actionCreate
-    };
+    var evaluationView = new EvaluationBuilder(subject, resource, actionView)
+        .WithRequestId("134")
+        .Build();
+    
+    var evaluationCreate = new EvaluationBuilder(subject, resource, actionCreate)
+        .WithRequestId("435")
+        .Build();
     
     // Create the entities
-    var entities = new List<Dictionary<string, object>>
+    var entities = new List<Dictionary<string, object>?>
     {
         new()
         {
@@ -70,11 +70,7 @@ try
         .WithSubject(subject)
         .WithPrincipal(principal)
         .WithEntitiesMap("cedar", entities)
-        .WithContext(new Dictionary<string, object>
-        {
-            { "time", "2025-01-23T16:17:46+00:00" },
-            { "isSubscriptionActive", true }
-        })
+        .WithContext(context)
         .WithEvaluation(evaluationView)
         .WithEvaluation(evaluationCreate)
         .Build();

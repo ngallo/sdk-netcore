@@ -5,7 +5,7 @@ namespace Permguard.Grpc;
 
 public class Converter
 {
-    public static Struct FromDictionary(Dictionary<string, object> dict)
+    public static Struct FromDictionary(Dictionary<string, object>? dict)
     {
         var structObj = new Struct();
         
@@ -22,7 +22,7 @@ public class Converter
         return structObj;
     }
 
-    public static RepeatedField<Struct> ToRepeatedField(List<Dictionary<string, object>> items)
+    public static RepeatedField<Struct> ToRepeatedField(List<Dictionary<string, object>?> items)
     {
         var repeatedField = new RepeatedField<Struct>();
 

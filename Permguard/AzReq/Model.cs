@@ -19,7 +19,7 @@ namespace Permguard.AzReq
         public string Schema { get; set; }
 
         [JsonPropertyName("items")]
-        public List<Dictionary<string, object>> Items { get; set; }
+        public List<Dictionary<string, object>?> Items { get; set; }
     }
 
     public class Evaluation
@@ -37,7 +37,7 @@ namespace Permguard.AzReq
         public Action Action { get; set; }
 
         [JsonPropertyName("context")]
-        public Dictionary<string, object> Context { get; set; }
+        public Dictionary<string, object>? Context { get; set; }
     }
 
     public class AZModel
@@ -74,7 +74,7 @@ namespace Permguard.AzReq
         public Action Action { get; set; }
 
         [JsonPropertyName("context")]
-        public Dictionary<string, object> Context { get; set; }
+        public Dictionary<string, object>? Context { get; set; }
 
         [JsonPropertyName("evaluations")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -105,7 +105,7 @@ namespace Permguard.AzReq
         public string Source { get; set; }
 
         [JsonPropertyName("properties")]
-        public Dictionary<string, object> Properties { get; set; }
+        public Dictionary<string, object>? Properties { get; set; }
     }
 
     public class Resource

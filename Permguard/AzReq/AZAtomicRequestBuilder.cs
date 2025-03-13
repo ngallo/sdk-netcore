@@ -41,14 +41,14 @@ namespace Permguard.AzReq
         }
 
         // WithEntitiesMap sets the entities map to the AZRequest.
-        public AZAtomicRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>> entities)
+        public AZAtomicRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
         {
             azRequestBuilder.WithEntitiesMap(schema, entities);
             return this;
         }
 
         // WithEntitiesItems sets the entities items to the AZRequest.
-        public AZAtomicRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>> entities)
+        public AZAtomicRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?> entities)
         {
             azRequestBuilder.WithEntitiesItems(schema, entities);
             return this;

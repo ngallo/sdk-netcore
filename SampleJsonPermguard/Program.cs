@@ -6,7 +6,7 @@ using Permguard.AzReq;
 AzClient client = new AzClient(new AzConfig().WithEndpoint(new AzEndpoint("http", 9094, "localhost")));
 //Create request
 var builder = new AZRequestBuilder(882005116936, "711299b99c12416396d674c0ec371f1d").WithRequestId("123457");
-var listEntities = new List<Dictionary<string, object>>();
+var listEntities = new List<Dictionary<string, object>?>();
 var entityProps = new Dictionary<string,object>();
 var uidDict = new Dictionary<string,object>();
 uidDict.Add("type", "MagicFarmacia::Platform::BranchInfo");

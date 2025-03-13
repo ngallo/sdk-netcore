@@ -75,7 +75,7 @@ namespace Permguard.AzReq
         }
 
         // Helper method to deep copy the properties dictionary.
-        private Dictionary<string, object> DeepCopy(Dictionary<string, object> source)
+        private Dictionary<string, object> DeepCopy(Dictionary<string, object>? source)
         {
             var copy = new Dictionary<string, object>();
             foreach (var kvp in source)

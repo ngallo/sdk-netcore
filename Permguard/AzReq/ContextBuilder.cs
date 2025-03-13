@@ -42,14 +42,14 @@ namespace Permguard.AzReq
         }
 
         // Build constructs and returns the context object (as a Dictionary).
-        public Dictionary<string, object> Build()
+        public Dictionary<string, object>? Build()
         {
             var instance = DeepCopy(context);
             return instance;
         }
 
         // Helper method to deep copy the dictionary.
-        private Dictionary<string, object> DeepCopy(Dictionary<string, object> source)
+        private Dictionary<string, object>? DeepCopy(Dictionary<string, object> source)
         {
             var copy = new Dictionary<string, object>();
             foreach (var kvp in source)

@@ -13,7 +13,7 @@ try
         .Build();
 
     // Create the entities
-    var entities = new List<Dictionary<string, object>>
+    var entities = new List<Dictionary<string, object>?>
     {
         new()
         {

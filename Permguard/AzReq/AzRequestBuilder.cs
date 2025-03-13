@@ -85,17 +85,17 @@ namespace Permguard.AzReq
         }
 
         // WithContext sets the context of the Evaluation.
-        public AZRequestBuilder WithContext(Dictionary<string, object> context)
+        public AZRequestBuilder WithContext(Dictionary<string, object>? context)
         {
             azRequest.Context = context;
             return this;
         }
 
         // WithEntitiesMap sets the entities map to the AZRequest.
-        public AZRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>> entities)
+        public AZRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
         {
             azRequest.AuthorizationModel.Entities.Schema = schema;
-            azRequest.AuthorizationModel.Entities.Items = new List<Dictionary<string, object>>();
+            azRequest.AuthorizationModel.Entities.Items = new List<Dictionary<string, object>?>();
             foreach (var entity in entities)
             {
                 azRequest.AuthorizationModel.Entities.Items.Add(entity);
@@ -104,10 +104,10 @@ namespace Permguard.AzReq
         }
 
         // WithEntitiesItems sets the entities items to the AZRequest.
-        public AZRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>> entities)
+        public AZRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?> entities)
         {
             azRequest.AuthorizationModel.Entities.Schema = schema;
-            azRequest.AuthorizationModel.Entities.Items = entities ?? new List<Dictionary<string, object>>();
+            azRequest.AuthorizationModel.Entities.Items = entities ?? new List<Dictionary<string, object>?>();
             return this;
         }
 

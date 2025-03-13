@@ -27,11 +27,11 @@ namespace Permguard.AzReq
     // EvaluationBuilder is the builder for the Evaluation object.
     public class EvaluationBuilder
     {
-        private EvaluationRequest azEvaluation;
+        private Evaluation azEvaluation;
         
-        public EvaluationBuilder(Policydecisionpoint.Subject subject, Policydecisionpoint.Resource resource, Policydecisionpoint.Action action)
+        public EvaluationBuilder(Subject subject, Resource resource, Action action)
         {
-            azEvaluation = new EvaluationRequest
+            azEvaluation = new Evaluation()
             {
                 Subject = subject,
                 Resource = resource,
@@ -47,16 +47,16 @@ namespace Permguard.AzReq
         }
 
         // WithContext sets the context of the Evaluation.
-        public EvaluationBuilder WithContext(Struct context)
+        public EvaluationBuilder WithContext(Dictionary<string, object>? context)
         {
             azEvaluation.Context = context;
             return this;
         }
 
         // Build constructs and returns the final Evaluation object.
-        public Policydecisionpoint.EvaluationRequest Build()
+        public Evaluation Build()
         {
-            var instance = new EvaluationRequest
+            var instance = new Evaluation
             {
                 Subject = azEvaluation.Subject,
                 Resource = azEvaluation.Resource,
@@ -68,12 +68,17 @@ namespace Permguard.AzReq
         }
 
         // Helper method to deep copy the context dictionary.
-        private Struct DeepCopy(Struct source)
+        private Dictionary<string, object>? DeepCopy(Dictionary<string, object>? source)
         {
-            var copy = new Struct();
-            foreach (var kvp in source.Fields)
+            if (source == null)
             {
-                copy.Fields[kvp.Key] = Value.ForString(kvp.Value.ToString()); // Assumes the values are primitives or deep copies themselves.
+                return null;
+            }
+
+            var copy = new Dictionary<string, object>();
+            foreach (var kvp in source)
+            {
+                copy[kvp.Key] = Value.ForString(kvp.Value.ToString()); // Assumes the values are primitives or deep copies themselves.
             }
             return copy;
         }
