@@ -18,14 +18,14 @@ namespace Permguard.AzReq
 {
     public class AzRequestBuilder
     {
-        private readonly AZRequest? azRequest;
+        private readonly AzRequest? azRequest;
 
-        // Constructor to initialize AZRequestBuilder with provided values.
+        // Constructor to initialize AzRequestBuilder with provided values.
         public AzRequestBuilder(long zoneId, string ledgerId)
         {
-            azRequest = new AZRequest
+            azRequest = new AzRequest
             {
-                AuthorizationModel = new AZModel
+                AuthorizationModel = new AzModel
                 {
                     ZoneId = zoneId,
                     PolicyStore = new PolicyStore
@@ -43,35 +43,35 @@ namespace Permguard.AzReq
             };
         }
 
-        // WithPrincipal sets the principal of the AZRequest.
+        // WithPrincipal sets the principal of the AzRequest.
         public AzRequestBuilder WithPrincipal(Principal? principal)
         {
             if (azRequest != null) azRequest.AuthorizationModel.Principal = principal;
             return this;
         }
 
-        // WithRequestId sets the request Id of the AZRequest.
+        // WithRequestId sets the request Id of the AzRequest.
         public AzRequestBuilder WithRequestId(string? requestId)
         {
             if (azRequest != null) azRequest.RequestId = requestId;
             return this;
         }
 
-        // WithSubject sets the subject of the AZRequest.
+        // WithSubject sets the subject of the AzRequest.
         public AzRequestBuilder WithSubject(Subject? subject)
         {
             if (azRequest != null) azRequest.Subject = subject;
             return this;
         }
 
-        // WithResource sets the resource of the AZRequest.
+        // WithResource sets the resource of the AzRequest.
         public AzRequestBuilder WithResource(Resource? resource)
         {
             if (azRequest != null) azRequest.Resource = resource;
             return this;
         }
 
-        // WithAction sets the action of the AZRequest.
+        // WithAction sets the action of the AzRequest.
         public AzRequestBuilder WithAction(Action? action)
         {
             if (azRequest != null) azRequest.Action = action;
@@ -85,7 +85,7 @@ namespace Permguard.AzReq
             return this;
         }
 
-        // WithEntitiesMap sets the entities map to the AZRequest.
+        // WithEntitiesMap sets the entities map to the AzRequest.
         public AzRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
         {
             if (azRequest?.AuthorizationModel.Entities == null) return this;
@@ -98,7 +98,7 @@ namespace Permguard.AzReq
             return this;
         }
 
-        // WithEntitiesItems sets the entities items to the AZRequest.
+        // WithEntitiesItems sets the entities items to the AzRequest.
         public AzRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?>? entities)
         {
             if (azRequest?.AuthorizationModel.Entities == null) return this;
@@ -107,15 +107,15 @@ namespace Permguard.AzReq
             return this;
         }
 
-        // WithEvaluation adds an evaluation to the AZRequest.
+        // WithEvaluation adds an evaluation to the AzRequest.
         public AzRequestBuilder WithEvaluation(Evaluation evaluation)
         {
             azRequest?.Evaluations.Add(evaluation);
             return this;
         }
 
-        // Build builds the AZRequest object.
-        public AZRequest? Build()
+        // Build builds the AzRequest object.
+        public AzRequest? Build()
         {
             return azRequest;
         }

@@ -18,7 +18,7 @@ namespace Permguard.AzReq
 {
     public class PrincipalBuilder
     {
-        private Principal principal;
+        private readonly Principal principal;
 
         // Constructor to initialize PrincipalBuilder with an Id.
         public PrincipalBuilder(string id)

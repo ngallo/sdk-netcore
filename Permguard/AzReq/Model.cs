@@ -54,7 +54,7 @@ namespace Permguard.AzReq
         public Dictionary<string, object>? Context { get; set; }
     }
 
-    public class AZModel
+    public class AzModel
     {
         [JsonPropertyName("zone_id")]
         public long ZoneId { get; set; }
@@ -69,11 +69,11 @@ namespace Permguard.AzReq
         public Entities? Entities { get; set; }
     }
 
-    public class AZRequest
+    public class AzRequest
     {
         [JsonPropertyName("authorization_model")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public AZModel AuthorizationModel { get; set; }
+        public AzModel AuthorizationModel { get; set; }
 
         [JsonPropertyName("request_id")]
         public string? RequestId { get; set; }
@@ -176,7 +176,7 @@ namespace Permguard.AzReq
         public ContextResponse? Context { get; set; }
     }
 
-    public class AZResponse
+    public class AzResponse
     {
         [JsonPropertyName("request_id")]
         public string RequestId { get; set; }

@@ -24,7 +24,7 @@ namespace Permguard.AzReq
     // EvaluationBuilder is the builder for the Evaluation object.
     public class EvaluationBuilder
     {
-        private Evaluation azEvaluation;
+        private readonly Evaluation azEvaluation;
         
         public EvaluationBuilder(Subject? subject, Resource? resource, Action? action)
         {

@@ -131,7 +131,7 @@ namespace Permguard.Grpc
             return target;
         }
 
-        private static AuthorizationModelRequest MapAuthZModelToGrpcAuthorizationModelRequest(AZModel azModel)
+        private static AuthorizationModelRequest MapAuthZModelToGrpcAuthorizationModelRequest(AzModel azModel)
         {
             var req = new AuthorizationModelRequest()
             {
@@ -156,7 +156,7 @@ namespace Permguard.Grpc
             return req;
         }
         
-        public static AuthorizationCheckRequest? MapAzRequestToGrpcAuthorizationCheckRequest(AZRequest? azRequest)
+        public static AuthorizationCheckRequest? MapAzRequestToGrpcAuthorizationCheckRequest(AzRequest? azRequest)
         {
             if (azRequest == null)
             {
@@ -246,14 +246,14 @@ namespace Permguard.Grpc
             return target;
         }
         
-        public static AZResponse? MapGrpcAuthorizationCheckResponseToAzResponse(AuthorizationCheckResponse? response)
+        public static AzResponse? MapGrpcAuthorizationCheckResponseToAzResponse(AuthorizationCheckResponse? response)
         {
             if (response == null)
             {
                 return null;
             }
 
-            var target = new AZResponse
+            var target = new AzResponse
             {
                 Decision = response.Decision,
                 RequestId = response.RequestID ?? ""

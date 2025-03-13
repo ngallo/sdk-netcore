@@ -24,7 +24,7 @@ namespace Permguard.AzReq
     // SubjectBuilder is the builder for the subject object.
     public class SubjectBuilder
     {
-        private Subject subject;
+        private readonly Subject subject;
 
         // Constructor to initialize SubjectBuilder with an Id
         public SubjectBuilder(string id)

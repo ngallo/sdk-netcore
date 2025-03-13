@@ -16,7 +16,7 @@
 
 namespace Permguard.AzReq
 {
-    // AZAtomicRequestBuilder is the builder for the AZAtomicRequest object.
+    // AzAtomicRequestBuilder is the builder for the AzAtomicRequest object.
     public class AzAtomicRequestBuilder
     {
         private string? requestId;
@@ -37,85 +37,85 @@ namespace Permguard.AzReq
             azContextBuilder = new ContextBuilder();
         }
 
-        // WithEntitiesMap sets the entities map to the AZRequest.
+        // WithEntitiesMap sets the entities map to the AzRequest.
         public AzAtomicRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
         {
             azRequestBuilder.WithEntitiesMap(schema, entities);
             return this;
         }
 
-        // WithEntitiesItems sets the entities items to the AZRequest.
+        // WithEntitiesItems sets the entities items to the AzRequest.
         public AzAtomicRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?>? entities)
         {
             azRequestBuilder.WithEntitiesItems(schema, entities);
             return this;
         }
 
-        // WithRequestId sets the Id of the AZRequest.
+        // WithRequestId sets the Id of the AzRequest.
         public AzAtomicRequestBuilder WithRequestId(string requestId)
         {
             this.requestId = requestId;
             return this;
         }
 
-        // WithPrincipal sets the principal of the AZRequest.
+        // WithPrincipal sets the principal of the AzRequest.
         public AzAtomicRequestBuilder WithPrincipal(Principal principal)
         {
             this.principal = principal;
             return this;
         }
 
-        // WithSubjectKind sets the kind of the subject for the AZRequest.
+        // WithSubjectKind sets the kind of the subject for the AzRequest.
         public AzAtomicRequestBuilder WithSubjectKind(string kind)
         {
             azSubjectBuilder.WithKind(kind);
             return this;
         }
 
-        // WithSubjectSource sets the source of the subject for the AZRequest.
+        // WithSubjectSource sets the source of the subject for the AzRequest.
         public AzAtomicRequestBuilder WithSubjectSource(string source)
         {
             azSubjectBuilder.WithSource(source);
             return this;
         }
 
-        // WithSubjectProperty sets a property of the subject for the AZRequest.
+        // WithSubjectProperty sets a property of the subject for the AzRequest.
         public AzAtomicRequestBuilder WithSubjectProperty(string key, object value)
         {
             azSubjectBuilder.WithProperty(key, value);
             return this;
         }
 
-        // WithResourceId sets the Id of the resource for the AZRequest.
+        // WithResourceId sets the Id of the resource for the AzRequest.
         public AzAtomicRequestBuilder WithResourceId(string id)
         {
             azResourceBuilder.WithId(id);
             return this;
         }
 
-        // WithResourceProperty sets a property of the resource for the AZRequest.
+        // WithResourceProperty sets a property of the resource for the AzRequest.
         public AzAtomicRequestBuilder WithResourceProperty(string key, object value)
         {
             azResourceBuilder.WithProperty(key, value);
             return this;
         }
 
-        // WithActionProperty sets a property of the action for the AZRequest.
+        // WithActionProperty sets a property of the action for the AzRequest.
         public AzAtomicRequestBuilder WithActionProperty(string key, object value)
         {
             azActionBuilder.WithProperty(key, value);
             return this;
         }
 
-        // WithContextProperty sets a property of the context for the AZRequest.
+        // WithContextProperty sets a property of the context for the AzRequest.
         public AzAtomicRequestBuilder WithContextProperty(string key, object value)
         {
             azContextBuilder.WithProperty(key, value);
             return this;
         }
 
-        // Build builds the AZAtomicRequest object.
-        public AZRequest? Build()
+        // Build builds the AzAtomicRequest object.
+        public AzRequest? Build()
         {
             var subject = azSubjectBuilder.Build();
             var resource = azResourceBuilder.Build();

@@ -13,7 +13,6 @@
 // limitations under the License.
 //
 // SPDX-License-Identifier: Apache-2.0
-
 using Grpc.Net.Client;
 using Permguard.AzReq;
 using Permguard.Grpc;
@@ -30,7 +29,7 @@ public class AzClient
         this.config = config;
     }
 
-    public AZResponse? CheckAuth(AZRequest? request)
+    public AzResponse? CheckAuth(AzRequest? request)
     {
         if (config?.Endpoint == null)
         {
