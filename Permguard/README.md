@@ -6,9 +6,6 @@
 [![Documentation](https://img.shields.io/website?label=Docs&url=https%3A%2F%2Fwww.permguard.com%2F)](https://www.permguard.com/)
 [![Build, test and publish the artifacts](https://github.com/permguard/permguard-netcore/actions/workflows/permguard-netcore-ci.yml/badge.svg)](https://github.com/permguard/permguard-netcore/actions/workflows/permguard-netcore-ci.yml)
 
-<p align="left">
-  <img src="https://raw.githubusercontent.com/permguard/permguard-assets/main/pink-txt//1line.svg" class="center" width="400px" height="auto"/>
-</p>
 
 The Permguard DotNet Core SDK provides a simple and flexible client to perform authorization checks against a Permguard Policy Decision Point (PDP) service using gRPC.
 Plase refer to the [Permguard Documentation](https://www.permguard.com/) for more information.
@@ -24,6 +21,10 @@ Plase refer to the [Permguard Documentation](https://www.permguard.com/) for mor
 ## Installation
 
 ## 📦 Install NuGet Packages
+
+```bash
+dotnet add package Permguard --version 0.0.2
+```
 
 ---
 
