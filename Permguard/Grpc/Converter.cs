@@ -3,7 +3,7 @@ using Google.Protobuf.WellKnownTypes;
 
 namespace Permguard.Grpc;
 
-public class Converter
+internal class Converter
 {
     public static Struct FromDictionary(Dictionary<string, object>? dict)
     {

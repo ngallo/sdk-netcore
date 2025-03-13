@@ -4,7 +4,7 @@ using Permguard.AzReq;
 
 namespace Permguard.Grpc
 {
-    public class MapService
+    internal class MapService
     {
         public static Policydecisionpoint.PolicyStore MapPolicyStoreToGrpcPolicyStore(PolicyStore policyStore)
         {
