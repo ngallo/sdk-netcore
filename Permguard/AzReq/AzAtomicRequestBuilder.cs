@@ -14,26 +14,23 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
-
 namespace Permguard.AzReq
 {
     // AZAtomicRequestBuilder is the builder for the AZAtomicRequest object.
-    public class AZAtomicRequestBuilder
+    public class AzAtomicRequestBuilder
     {
-        private string requestId;
-        private Principal principal;
+        private string? requestId;
+        private Principal? principal;
         private readonly SubjectBuilder azSubjectBuilder;
         private readonly ResourceBuilder azResourceBuilder;
         private readonly ActionBuilder azActionBuilder;
         private readonly ContextBuilder azContextBuilder;
-        private readonly AZRequestBuilder azRequestBuilder;
+        private readonly AzRequestBuilder azRequestBuilder;
 
         // Constructor
-        public AZAtomicRequestBuilder(long zoneId, string ledgerId, string subjectId, string resourceKind, string actionName)
+        public AzAtomicRequestBuilder(long zoneId, string ledgerId, string subjectId, string resourceKind, string actionName)
         {
-            azRequestBuilder = new AZRequestBuilder(zoneId, ledgerId);
+            azRequestBuilder = new AzRequestBuilder(zoneId, ledgerId);
             azSubjectBuilder = new SubjectBuilder(subjectId);
             azResourceBuilder = new ResourceBuilder(resourceKind);
             azActionBuilder = new ActionBuilder(actionName);
@@ -41,84 +38,84 @@ namespace Permguard.AzReq
         }
 
         // WithEntitiesMap sets the entities map to the AZRequest.
-        public AZAtomicRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
+        public AzAtomicRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
         {
             azRequestBuilder.WithEntitiesMap(schema, entities);
             return this;
         }
 
         // WithEntitiesItems sets the entities items to the AZRequest.
-        public AZAtomicRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?> entities)
+        public AzAtomicRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?>? entities)
         {
             azRequestBuilder.WithEntitiesItems(schema, entities);
             return this;
         }
 
         // WithRequestId sets the Id of the AZRequest.
-        public AZAtomicRequestBuilder WithRequestId(string requestId)
+        public AzAtomicRequestBuilder WithRequestId(string requestId)
         {
             this.requestId = requestId;
             return this;
         }
 
         // WithPrincipal sets the principal of the AZRequest.
-        public AZAtomicRequestBuilder WithPrincipal(Principal principal)
+        public AzAtomicRequestBuilder WithPrincipal(Principal principal)
         {
             this.principal = principal;
             return this;
         }
 
         // WithSubjectKind sets the kind of the subject for the AZRequest.
-        public AZAtomicRequestBuilder WithSubjectKind(string kind)
+        public AzAtomicRequestBuilder WithSubjectKind(string kind)
         {
             azSubjectBuilder.WithKind(kind);
             return this;
         }
 
         // WithSubjectSource sets the source of the subject for the AZRequest.
-        public AZAtomicRequestBuilder WithSubjectSource(string source)
+        public AzAtomicRequestBuilder WithSubjectSource(string source)
         {
             azSubjectBuilder.WithSource(source);
             return this;
         }
 
         // WithSubjectProperty sets a property of the subject for the AZRequest.
-        public AZAtomicRequestBuilder WithSubjectProperty(string key, object value)
+        public AzAtomicRequestBuilder WithSubjectProperty(string key, object value)
         {
             azSubjectBuilder.WithProperty(key, value);
             return this;
         }
 
         // WithResourceId sets the Id of the resource for the AZRequest.
-        public AZAtomicRequestBuilder WithResourceId(string id)
+        public AzAtomicRequestBuilder WithResourceId(string id)
         {
             azResourceBuilder.WithId(id);
             return this;
         }
 
         // WithResourceProperty sets a property of the resource for the AZRequest.
-        public AZAtomicRequestBuilder WithResourceProperty(string key, object value)
+        public AzAtomicRequestBuilder WithResourceProperty(string key, object value)
         {
             azResourceBuilder.WithProperty(key, value);
             return this;
         }
 
         // WithActionProperty sets a property of the action for the AZRequest.
-        public AZAtomicRequestBuilder WithActionProperty(string key, object value)
+        public AzAtomicRequestBuilder WithActionProperty(string key, object value)
         {
             azActionBuilder.WithProperty(key, value);
             return this;
         }
 
         // WithContextProperty sets a property of the context for the AZRequest.
-        public AZAtomicRequestBuilder WithContextProperty(string key, object value)
+        public AzAtomicRequestBuilder WithContextProperty(string key, object value)
         {
             azContextBuilder.WithProperty(key, value);
             return this;
         }
 
         // Build builds the AZAtomicRequest object.
-        public AZRequest Build()
+        public AZRequest? Build()
         {
             var subject = azSubjectBuilder.Build();
             var resource = azResourceBuilder.Build();

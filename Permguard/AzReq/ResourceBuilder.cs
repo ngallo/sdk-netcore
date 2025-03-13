@@ -14,10 +14,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
-using Google.Protobuf.WellKnownTypes;
-
 namespace Permguard.AzReq
 {
     // ResourceBuilder is the builder for the resource object.
@@ -62,8 +58,9 @@ namespace Permguard.AzReq
         }
 
         // Helper method to deep copy the properties dictionary.
-        private static Dictionary<string, object> DeepCopy(Dictionary<string, object> source)
+        private static Dictionary<string, object> DeepCopy(Dictionary<string, object>? source)
         {
+            if (source == null) return new Dictionary<string, object>();
             var copy = new Dictionary<string, object>();
             foreach (var key in source.Keys)
             {

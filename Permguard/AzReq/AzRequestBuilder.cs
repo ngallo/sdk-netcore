@@ -13,21 +13,15 @@
 // limitations under the License.
 //
 // SPDX-License-Identifier: Apache-2.0
-using System;
-using System.Collections.Generic;
-using Google.Protobuf.Collections;
-using Google.Protobuf.WellKnownTypes;
-using Policydecisionpoint;
-using Permguard;
 
 namespace Permguard.AzReq
 {
-    public class AZRequestBuilder
+    public class AzRequestBuilder
     {
-        private AZRequest azRequest;
+        private readonly AZRequest? azRequest;
 
         // Constructor to initialize AZRequestBuilder with provided values.
-        public AZRequestBuilder(long zoneId, string ledgerId)
+        public AzRequestBuilder(long zoneId, string ledgerId)
         {
             azRequest = new AZRequest
             {
@@ -50,50 +44,51 @@ namespace Permguard.AzReq
         }
 
         // WithPrincipal sets the principal of the AZRequest.
-        public AZRequestBuilder WithPrincipal(Principal principal)
+        public AzRequestBuilder WithPrincipal(Principal? principal)
         {
-            azRequest.AuthorizationModel.Principal = principal;
+            if (azRequest != null) azRequest.AuthorizationModel.Principal = principal;
             return this;
         }
 
         // WithRequestId sets the request Id of the AZRequest.
-        public AZRequestBuilder WithRequestId(string requestId)
+        public AzRequestBuilder WithRequestId(string? requestId)
         {
-            azRequest.RequestId = requestId;
+            if (azRequest != null) azRequest.RequestId = requestId;
             return this;
         }
 
         // WithSubject sets the subject of the AZRequest.
-        public AZRequestBuilder WithSubject(Subject subject)
+        public AzRequestBuilder WithSubject(Subject? subject)
         {
-            azRequest.Subject = subject;
+            if (azRequest != null) azRequest.Subject = subject;
             return this;
         }
 
         // WithResource sets the resource of the AZRequest.
-        public AZRequestBuilder WithResource(Resource resource)
+        public AzRequestBuilder WithResource(Resource? resource)
         {
-            azRequest.Resource = resource;
+            if (azRequest != null) azRequest.Resource = resource;
             return this;
         }
 
         // WithAction sets the action of the AZRequest.
-        public AZRequestBuilder WithAction(Action action)
+        public AzRequestBuilder WithAction(Action? action)
         {
-            azRequest.Action = action;
+            if (azRequest != null) azRequest.Action = action;
             return this;
         }
 
         // WithContext sets the context of the Evaluation.
-        public AZRequestBuilder WithContext(Dictionary<string, object>? context)
+        public AzRequestBuilder WithContext(Dictionary<string, object>? context)
         {
-            azRequest.Context = context;
+            if (azRequest != null) azRequest.Context = context;
             return this;
         }
 
         // WithEntitiesMap sets the entities map to the AZRequest.
-        public AZRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
+        public AzRequestBuilder WithEntitiesMap(string schema, List<Dictionary<string, object>?> entities)
         {
+            if (azRequest?.AuthorizationModel.Entities == null) return this;
             azRequest.AuthorizationModel.Entities.Schema = schema;
             azRequest.AuthorizationModel.Entities.Items = new List<Dictionary<string, object>?>();
             foreach (var entity in entities)
@@ -104,22 +99,23 @@ namespace Permguard.AzReq
         }
 
         // WithEntitiesItems sets the entities items to the AZRequest.
-        public AZRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?> entities)
+        public AzRequestBuilder WithEntitiesItems(string schema, List<Dictionary<string, object>?>? entities)
         {
+            if (azRequest?.AuthorizationModel.Entities == null) return this;
             azRequest.AuthorizationModel.Entities.Schema = schema;
             azRequest.AuthorizationModel.Entities.Items = entities ?? new List<Dictionary<string, object>?>();
             return this;
         }
 
         // WithEvaluation adds an evaluation to the AZRequest.
-        public AZRequestBuilder WithEvaluation(Evaluation evaluation)
+        public AzRequestBuilder WithEvaluation(Evaluation evaluation)
         {
-            azRequest.Evaluations.Add(evaluation);
+            azRequest?.Evaluations.Add(evaluation);
             return this;
         }
 
         // Build builds the AZRequest object.
-        public AZRequest Build()
+        public AZRequest? Build()
         {
             return azRequest;
         }

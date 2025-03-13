@@ -8,21 +8,18 @@ internal class Converter
     public static Struct FromDictionary(Dictionary<string, object>? dict)
     {
         var structObj = new Struct();
-        
-        if (dict != null)
+
+        if (dict == null) return structObj;
+        foreach (var (key, value) in dict)
         {
-            foreach (var kvp in dict)
-            {
-                object value = kvp.Value;
-                var convertedValue = ConvertToValue(value);
-                structObj.Fields.Add(kvp.Key, convertedValue);
-            }
+            var convertedValue = ConvertToValue(value);
+            structObj.Fields.Add(key, convertedValue);
         }
 
         return structObj;
     }
 
-    public static RepeatedField<Struct> ToRepeatedField(List<Dictionary<string, object>?> items)
+    public static RepeatedField<Struct> ToRepeatedField(List<Dictionary<string, object>?>? items)
     {
         var repeatedField = new RepeatedField<Struct>();
 

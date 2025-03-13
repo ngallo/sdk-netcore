@@ -14,10 +14,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
-using Policydecisionpoint;
 
 namespace Permguard.AzReq
 {
@@ -29,7 +26,7 @@ namespace Permguard.AzReq
     {
         private Evaluation azEvaluation;
         
-        public EvaluationBuilder(Subject subject, Resource resource, Action action)
+        public EvaluationBuilder(Subject? subject, Resource? resource, Action? action)
         {
             azEvaluation = new Evaluation()
             {

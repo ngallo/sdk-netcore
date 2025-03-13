@@ -1,12 +1,22 @@
 
 
 using Permguard.AzReq;
+using Policydecisionpoint;
+using Action = Permguard.AzReq.Action;
+using ContextResponse = Permguard.AzReq.ContextResponse;
+using Entities = Permguard.AzReq.Entities;
+using EvaluationResponse = Permguard.AzReq.EvaluationResponse;
+using PolicyStore = Permguard.AzReq.PolicyStore;
+using Principal = Permguard.AzReq.Principal;
+using ReasonResponse = Permguard.AzReq.ReasonResponse;
+using Resource = Permguard.AzReq.Resource;
+using Subject = Permguard.AzReq.Subject;
 
 namespace Permguard.Grpc
 {
-    internal class MapService
+    internal static class MapService
     {
-        public static Policydecisionpoint.PolicyStore MapPolicyStoreToGrpcPolicyStore(PolicyStore policyStore)
+        private static Policydecisionpoint.PolicyStore? MapPolicyStoreToGrpcPolicyStore(PolicyStore? policyStore)
         {
             if (policyStore == null)
             {
@@ -15,12 +25,12 @@ namespace Permguard.Grpc
 
             return new Policydecisionpoint.PolicyStore
             {
-                Id = policyStore.Id,
+                ID = policyStore.Id,
                 Kind = policyStore.Kind
             };
         }
-        
-        public static Policydecisionpoint.Principal MapPrincipalToGrpcPrincipal(Principal principal)
+
+        private static Policydecisionpoint.Principal? MapPrincipalToGrpcPrincipal(Principal? principal)
         {
             if (principal == null)
             {
@@ -29,13 +39,13 @@ namespace Permguard.Grpc
 
             return new Policydecisionpoint.Principal
             {
-                Id = principal.Id,
+                ID = principal.Id,
                 Type = principal.Type,
                 Source = string.IsNullOrEmpty(principal.Source) ? null : principal.Source
             };
         }
-        
-        public static Policydecisionpoint.Entities MapEntitiesToGrpcEntities(Entities entities)
+
+        private static Policydecisionpoint.Entities? MapEntitiesToGrpcEntities(Entities? entities)
         {
             if (entities == null)
             {
@@ -46,7 +56,7 @@ namespace Permguard.Grpc
             {
                 Schema = entities.Schema
             };
-            var results = Grpc.Converter.ToRepeatedField(entities.Items);
+            var results = Converter.ToRepeatedField(entities.Items);
             foreach(var result in results)
             {
                 target.Items.Add(result);
@@ -55,7 +65,7 @@ namespace Permguard.Grpc
             return target;
         }
 
-        public static Policydecisionpoint.Subject MapSubjectToGrpcSubject(Subject subject)
+        private static Policydecisionpoint.Subject? MapSubjectToGrpcSubject(Subject? subject)
         {
             if (subject == null)
             {
@@ -64,16 +74,16 @@ namespace Permguard.Grpc
 
             var target = new Policydecisionpoint.Subject
             {
-                Id = subject.Id,
+                ID = subject.Id,
                 Type = subject.Type,
                 Source = string.IsNullOrEmpty(subject.Source) ? null : subject.Source,
-                Properties = subject.Properties == null ? null : Grpc.Converter.FromDictionary(subject.Properties)
+                Properties = subject.Properties == null ? null : Converter.FromDictionary(subject.Properties)
             };
 
             return target;
         }
-        
-        public static Policydecisionpoint.Resource MapResourceToGrpcResource(Resource resource)
+
+        private static Policydecisionpoint.Resource? MapResourceToGrpcResource(Resource? resource)
         {
             if (resource == null)
             {
@@ -82,13 +92,13 @@ namespace Permguard.Grpc
 
             return new Policydecisionpoint.Resource
             {
-                Id = resource.Id,
+                ID = resource.Id,
                 Type = resource.Type,
-                Properties = resource.Properties == null ? null : Grpc.Converter.FromDictionary(resource.Properties)
+                Properties = resource.Properties == null ? null : Converter.FromDictionary(resource.Properties)
             };
         }
-        
-        public static Policydecisionpoint.Action MapActionToGrpcAction(Permguard.AzReq.Action action)
+
+        private static Policydecisionpoint.Action? MapActionToGrpcAction(Action? action)
         {
             if (action == null)
             {
@@ -101,17 +111,17 @@ namespace Permguard.Grpc
                 Properties = Grpc.Converter.FromDictionary(action.Properties)
             };
         }
-        
-        public static Policydecisionpoint.EvaluationRequest MapEvaluationToGrpcEvaluationRequest(Evaluation evaluation)
+
+        private static EvaluationRequest? MapEvaluationToGrpcEvaluationRequest(Evaluation? evaluation)
         {
             if (evaluation == null)
             {
                 return null;
             }
 
-            var target = new Policydecisionpoint.EvaluationRequest
+            var target = new EvaluationRequest
             {
-                RequestId = evaluation.RequestId,
+                RequestID = evaluation.RequestId,
                 Subject = evaluation.Subject == null ? null : MapSubjectToGrpcSubject(evaluation.Subject),
                 Resource = evaluation.Resource == null ? null : MapResourceToGrpcResource(evaluation.Resource),
                 Action = evaluation.Action == null ? null : MapActionToGrpcAction(evaluation.Action),
@@ -120,12 +130,12 @@ namespace Permguard.Grpc
 
             return target;
         }
-        
-        public static Policydecisionpoint.AuthorizationModelRequest MapAuthZModelToGrpcAuthorizationModelRequest(AZModel azModel)
+
+        private static AuthorizationModelRequest MapAuthZModelToGrpcAuthorizationModelRequest(AZModel azModel)
         {
-            var req = new Policydecisionpoint.AuthorizationModelRequest()
+            var req = new AuthorizationModelRequest()
             {
-                ZoneId = azModel.ZoneId
+                ZoneID = azModel.ZoneId
             };
 
             if (azModel.PolicyStore != null)
@@ -146,22 +156,18 @@ namespace Permguard.Grpc
             return req;
         }
         
-        public static Policydecisionpoint.AuthorizationCheckRequest MapAZRequestToGrpcAuthorizationCheckRequest(AZRequest azRequest)
+        public static AuthorizationCheckRequest? MapAzRequestToGrpcAuthorizationCheckRequest(AZRequest? azRequest)
         {
             if (azRequest == null)
             {
                 return null;
             }
 
-            var req = new Policydecisionpoint.AuthorizationCheckRequest
+            var req = new AuthorizationCheckRequest
             {
-                RequestId = azRequest.RequestId
+                RequestID = azRequest.RequestId,
+                AuthorizationModel = MapAuthZModelToGrpcAuthorizationModelRequest(azRequest.AuthorizationModel)
             };
-
-            if (azRequest.AuthorizationModel != null)
-            {
-                req.AuthorizationModel = MapAuthZModelToGrpcAuthorizationModelRequest(azRequest.AuthorizationModel);
-            }
 
             if (azRequest.Subject != null)
             {
@@ -180,18 +186,15 @@ namespace Permguard.Grpc
 
             if (azRequest.Context != null)
             {
-                req.Context = Grpc.Converter.FromDictionary(azRequest.Context);
+                req.Context = Converter.FromDictionary(azRequest.Context);
             }
 
-            if (azRequest.Evaluations != null)
-            {
-                req.Evaluations.Add(azRequest.Evaluations.Select(MapEvaluationToGrpcEvaluationRequest).ToList());
-            }
+            req.Evaluations.Add(azRequest.Evaluations.Select(MapEvaluationToGrpcEvaluationRequest).ToList());
 
             return req;
         }
-        
-        public static ReasonResponse MapGrpcReasonResponseToReasonResponse(Policydecisionpoint.ReasonResponse reasonResponse)
+
+        private static ReasonResponse? MapGrpcReasonResponseToReasonResponse(Policydecisionpoint.ReasonResponse? reasonResponse)
         {
             if (reasonResponse == null)
             {
@@ -204,8 +207,8 @@ namespace Permguard.Grpc
                 Message = reasonResponse.Message
             };
         }
-        
-        public static ContextResponse MapGrpcContextResponseToContextResponse(Policydecisionpoint.ContextResponse contextResponse)
+
+        private static ContextResponse? MapGrpcContextResponseToContextResponse(Policydecisionpoint.ContextResponse? contextResponse)
         {
             if (contextResponse == null)
             {
@@ -214,15 +217,15 @@ namespace Permguard.Grpc
 
             var target = new ContextResponse
             {
-                Id = contextResponse.Id,
+                Id = contextResponse.ID,
                 ReasonAdmin = contextResponse.ReasonAdmin == null ? null : MapGrpcReasonResponseToReasonResponse(contextResponse.ReasonAdmin),
                 ReasonUser = contextResponse.ReasonUser == null ? null : MapGrpcReasonResponseToReasonResponse(contextResponse.ReasonUser)
             };
 
             return target;
         }
-        
-        public static EvaluationResponse MapGrpcEvaluationResponseToEvaluationResponse(Policydecisionpoint.EvaluationResponse evaluationResponse)
+
+        private static EvaluationResponse? MapGrpcEvaluationResponseToEvaluationResponse(Policydecisionpoint.EvaluationResponse? evaluationResponse)
         {
             if (evaluationResponse == null)
             {
@@ -232,7 +235,7 @@ namespace Permguard.Grpc
             var target = new EvaluationResponse
             {
                 Decision = evaluationResponse.Decision,
-                RequestId = evaluationResponse.RequestId ?? ""
+                RequestId = evaluationResponse.RequestID ?? ""
             };
 
             if (evaluationResponse.Context != null)
@@ -243,7 +246,7 @@ namespace Permguard.Grpc
             return target;
         }
         
-        public static AZResponse MapGrpcAuthorizationCheckResponseToAZResponse(Policydecisionpoint.AuthorizationCheckResponse response)
+        public static AZResponse? MapGrpcAuthorizationCheckResponseToAzResponse(AuthorizationCheckResponse? response)
         {
             if (response == null)
             {
@@ -253,7 +256,7 @@ namespace Permguard.Grpc
             var target = new AZResponse
             {
                 Decision = response.Decision,
-                RequestId = response.RequestId ?? ""
+                RequestId = response.RequestID ?? ""
             };
 
             if (response.Context != null)
@@ -263,7 +266,7 @@ namespace Permguard.Grpc
 
             if (response.Evaluations != null)
             {
-                target.Evaluations = response.Evaluations.Select(evaluationResponse => MapGrpcEvaluationResponseToEvaluationResponse(evaluationResponse)).ToList();
+                target.Evaluations = response.Evaluations.Select(MapGrpcEvaluationResponseToEvaluationResponse).ToList()!;
             }
 
             return target;

@@ -14,9 +14,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
-
 namespace Permguard.AzReq
 {
     public static class SubjectDefault
@@ -57,7 +54,7 @@ namespace Permguard.AzReq
         // WithProperty sets a property of the subject.
         public SubjectBuilder WithProperty(string key, object value)
         {
-            subject.Properties[key] = value;
+            if (subject.Properties != null) subject.Properties[key] = value;
             return this;
         }
 
@@ -78,6 +75,7 @@ namespace Permguard.AzReq
         private Dictionary<string, object> DeepCopy(Dictionary<string, object>? source)
         {
             var copy = new Dictionary<string, object>();
+            if (source == null) return copy;
             foreach (var kvp in source)
             {
                 copy[kvp.Key] = kvp.Value; // This assumes that the values are primitive or deep copies themselves.

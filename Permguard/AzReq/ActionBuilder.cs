@@ -14,16 +14,12 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
-using Google.Protobuf.WellKnownTypes;
-
 namespace Permguard.AzReq
 {
     // ActionBuilder is the builder for the action object.
     public class ActionBuilder
     {
-        private Action action;
+        private readonly Action action;
 
         // Constructor to initialize ActionBuilder with a name.
         public ActionBuilder(string name)
@@ -43,7 +39,7 @@ namespace Permguard.AzReq
         }
 
         // Build constructs and returns the final Action object.
-        public Action Build()
+        public Action? Build()
         {
             var instance = new Action
             {
@@ -53,7 +49,7 @@ namespace Permguard.AzReq
             return instance;
         }
 
-        // Helper method to deep copy the properties dictionary.
+        // Helper method to deep copy the properties' dictionary.
         private Dictionary<string,object> DeepCopy(Dictionary<string, object>? source)
         {
             var copy = new Dictionary<string,object>();

@@ -29,7 +29,7 @@ try
     };
    
     // Create a new authorization request
-    var request = new AZAtomicRequestBuilder(285374414806,
+    var request = new AzAtomicRequestBuilder(285374414806,
             "f81aec177f8a44a48b7ceee45e05507f",
             "platform-creator",
             "MagicFarmacia::Platform::Subscription",

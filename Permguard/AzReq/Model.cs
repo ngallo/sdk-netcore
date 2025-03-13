@@ -1,6 +1,20 @@
-using System;
+// Copyright 2025 Nitro Agility S.r.l.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// SPDX-License-Identifier: Apache-2.0
+
 using System.Text.Json.Serialization;
-using System.Collections.Generic;
 
 namespace Permguard.AzReq
 {
@@ -28,13 +42,13 @@ namespace Permguard.AzReq
         public string RequestId { get; set; }
 
         [JsonPropertyName("subject")]
-        public Subject Subject { get; set; }
+        public Subject? Subject { get; set; }
 
         [JsonPropertyName("resource")]
-        public Resource Resource { get; set; }
+        public Resource? Resource { get; set; }
 
         [JsonPropertyName("action")]
-        public Action Action { get; set; }
+        public Action? Action { get; set; }
 
         [JsonPropertyName("context")]
         public Dictionary<string, object>? Context { get; set; }
@@ -46,13 +60,13 @@ namespace Permguard.AzReq
         public long ZoneId { get; set; }
 
         [JsonPropertyName("principal")]
-        public Principal Principal { get; set; }
+        public Principal? Principal { get; set; }
 
         [JsonPropertyName("policy_store")]
-        public PolicyStore PolicyStore { get; set; }
+        public PolicyStore? PolicyStore { get; set; }
 
         [JsonPropertyName("entities")]
-        public Entities Entities { get; set; }
+        public Entities? Entities { get; set; }
     }
 
     public class AZRequest
@@ -62,16 +76,16 @@ namespace Permguard.AzReq
         public AZModel AuthorizationModel { get; set; }
 
         [JsonPropertyName("request_id")]
-        public string RequestId { get; set; }
+        public string? RequestId { get; set; }
 
         [JsonPropertyName("subject")]
-        public Subject Subject { get; set; }
+        public Subject? Subject { get; set; }
 
         [JsonPropertyName("resource")]
-        public Resource Resource { get; set; }
+        public Resource? Resource { get; set; }
 
         [JsonPropertyName("action")]
-        public Action Action { get; set; }
+        public Action? Action { get; set; }
 
         [JsonPropertyName("context")]
         public Dictionary<string, object>? Context { get; set; }

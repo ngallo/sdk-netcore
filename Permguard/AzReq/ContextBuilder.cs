@@ -14,42 +14,29 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
-
 namespace Permguard.AzReq
 {
     // ContextBuilder is the builder for the context object.
     public class ContextBuilder
     {
-        private Dictionary<string, object> context;
-
-        // Constructor to initialize ContextBuilder.
-        public ContextBuilder()
-        {
-            context = new Dictionary<string, object>();
-        }
+        private readonly Dictionary<string, object> context = new();
 
         // WithProperty sets a property of the context.
         public ContextBuilder WithProperty(string key, object value)
         {
-            if (context == null)
-            {
-                context = new Dictionary<string, object>();
-            }
             context[key] = value;
             return this;
         }
 
         // Build constructs and returns the context object (as a Dictionary).
-        public Dictionary<string, object>? Build()
+        public Dictionary<string, object> Build()
         {
             var instance = DeepCopy(context);
             return instance;
         }
 
         // Helper method to deep copy the dictionary.
-        private Dictionary<string, object>? DeepCopy(Dictionary<string, object> source)
+        private static Dictionary<string, object> DeepCopy(Dictionary<string, object> source)
         {
             var copy = new Dictionary<string, object>();
             foreach (var kvp in source)

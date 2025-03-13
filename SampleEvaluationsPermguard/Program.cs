@@ -1,5 +1,6 @@
 ﻿using Permguard;
 using Permguard.AzReq;
+using Action = Permguard.AzReq.Action;
 
 try
 {
@@ -65,7 +66,7 @@ try
     };
     
     // Create a new authorization request
-    var request = new AZRequestBuilder(285374414806, "f81aec177f8a44a48b7ceee45e05507f")
+    var request = new AzRequestBuilder(285374414806, "f81aec177f8a44a48b7ceee45e05507f")
         .WithRequestId("123457")
         .WithSubject(subject)
         .WithPrincipal(principal)

@@ -14,8 +14,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-
 namespace Permguard.AzReq
 {
     public class PrincipalBuilder
@@ -47,7 +45,7 @@ namespace Permguard.AzReq
         }
 
         // Build constructs and returns the final Principal object.
-        public Principal Build()
+        public Principal? Build()
         {
             var instance = new Principal
             {
