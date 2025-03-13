@@ -14,30 +14,27 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
-
 namespace Permguard.AzReq
 {
     public static class SubjectDefault
     {
-        public const string Type = "user";
+        public const string UserType = "user";
     }
 
     // SubjectBuilder is the builder for the subject object.
-    public class SubjectBuilder
+    public class SubjectBuilder: Builder
     {
-        private Subject subject;
+        private readonly Subject subject;
 
-        // Constructor to initialize SubjectBuilder with an ID
+        // Constructor to initialize SubjectBuilder with an Id
         public SubjectBuilder(string id)
         {
             subject = new Subject
             {
-                ID = id,
-                Type = SubjectDefault.Type
+                Id = id,
+                Type = SubjectDefault.UserType,
+                Properties = new Dictionary<string, object>()
             };
-            subject.Properties = new Dictionary<string, object>();
         }
 
         // WithKind sets the kind of the subject.
@@ -57,32 +54,21 @@ namespace Permguard.AzReq
         // WithProperty sets a property of the subject.
         public SubjectBuilder WithProperty(string key, object value)
         {
-            subject.Properties[key] = value;
+            if (subject.Properties != null) subject.Properties[key] = value;
             return this;
         }
 
         // Build constructs and returns the final Subject object.
-        public Permguard.Subject Build()
+        public Subject Build()
         {
             var instance = new Subject
             {
-                ID = subject.ID,
+                Id = subject.Id,
                 Type = subject.Type,
                 Source = subject.Source,
                 Properties = DeepCopy(subject.Properties)
             };
             return instance;
-        }
-
-        // Helper method to deep copy the properties dictionary.
-        private Dictionary<string, object> DeepCopy(Dictionary<string, object> source)
-        {
-            var copy = new Dictionary<string, object>();
-            foreach (var kvp in source)
-            {
-                copy[kvp.Key] = kvp.Value; // This assumes that the values are primitive or deep copies themselves.
-            }
-            return copy;
         }
     }
 }

@@ -14,10 +14,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
-using Policydecisionpoint;
 
 namespace Permguard.AzReq
 {
@@ -25,13 +22,13 @@ namespace Permguard.AzReq
     
 
     // EvaluationBuilder is the builder for the Evaluation object.
-    public class EvaluationBuilder
+    public class EvaluationBuilder: Builder
     {
-        private EvaluationRequest azEvaluation;
+        private readonly Evaluation azEvaluation;
         
-        public EvaluationBuilder(Policydecisionpoint.Subject subject, Policydecisionpoint.Resource resource, Policydecisionpoint.Action action)
+        public EvaluationBuilder(Subject? subject, Resource? resource, Action? action)
         {
-            azEvaluation = new EvaluationRequest
+            azEvaluation = new Evaluation()
             {
                 Subject = subject,
                 Resource = resource,
@@ -39,43 +36,32 @@ namespace Permguard.AzReq
             };
         }
 
-        // WithRequestID sets the request ID of the Evaluation.
-        public EvaluationBuilder WithRequestID(string requestID)
+        // WithRequestId sets the request Id of the Evaluation.
+        public EvaluationBuilder WithRequestId(string requestId)
         {
-            azEvaluation.RequestID = requestID;
+            azEvaluation.RequestId = requestId;
             return this;
         }
 
         // WithContext sets the context of the Evaluation.
-        public EvaluationBuilder WithContext(Struct context)
+        public EvaluationBuilder WithContext(Dictionary<string, object>? context)
         {
             azEvaluation.Context = context;
             return this;
         }
 
         // Build constructs and returns the final Evaluation object.
-        public Policydecisionpoint.EvaluationRequest Build()
+        public Evaluation Build()
         {
-            var instance = new EvaluationRequest
+            var instance = new Evaluation
             {
                 Subject = azEvaluation.Subject,
                 Resource = azEvaluation.Resource,
                 Action = azEvaluation.Action,
-                RequestID = azEvaluation.RequestID,
+                RequestId = azEvaluation.RequestId,
                 Context = DeepCopy(azEvaluation.Context)
             };
             return instance;
-        }
-
-        // Helper method to deep copy the context dictionary.
-        private Struct DeepCopy(Struct source)
-        {
-            var copy = new Struct();
-            foreach (var kvp in source.Fields)
-            {
-                copy.Fields[kvp.Key] = Value.ForString(kvp.Value.ToString()); // Assumes the values are primitives or deep copies themselves.
-            }
-            return copy;
         }
     }
 }

@@ -1,4 +1,38 @@
-﻿// Copyright 2025 Nitro Agility S.r.l.
+# Permguard DotNet Core SDK
+
+[![GitHub License](https://img.shields.io/github/license/permguard/permguard-go)](https://github.com/permguard/permguard-go?tab=Apache-2.0-1-ov-file#readme)
+[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/permguard)](https://x.com/intent/follow?original_referer=https%3A%2F%2Fdeveloper.x.com%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5ETwitterDev&screen_name=Permguard)
+
+[![Documentation](https://img.shields.io/website?label=Docs&url=https%3A%2F%2Fwww.permguard.com%2F)](https://www.permguard.com/)
+[![Build, test and publish the artifacts](https://github.com/permguard/permguard-go/actions/workflows/permguard-go-ci.yml/badge.svg)](https://github.com/permguard/permguard-go/actions/workflows/permguard-go-ci.yml)
+
+<p align="left">
+  <img src="https://raw.githubusercontent.com/permguard/permguard-assets/main/pink-txt//1line.svg" class="center" width="400px" height="auto"/>
+</p>
+
+The Permguard DotNet Core SDK provides a simple and flexible client to perform authorization checks against a Permguard Policy Decision Point (PDP) service using gRPC.
+Plase refer to the [Permguard Documentation](https://www.permguard.com/) for more information.
+
+---
+
+## Prerequisites
+
+- **Net Core 8**
+
+---
+
+## Installation
+
+## 📦 Install NuGet Packages
+
+---
+
+## Usage Example
+
+Below is a sample Go code demonstrating how to create a Permguard client, build an authorization request using a builder pattern, and process the authorization response:
+
+```csharp
+// Copyright 2025 Nitro Agility S.r.l.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -75,7 +109,7 @@ try
     if (response == null)
     {
         Console.WriteLine("❌ Failed to check auth.");
-        throw new Exception("Failed to check auth response");
+        throw new Exception($"Failed to check auth response");
     }
     if (response.Decision) {
         Console.WriteLine("✅ Authorization Permitted");
@@ -117,3 +151,30 @@ catch (Exception e)
     Console.WriteLine("❌ Failed to check auth.");
     throw;
 }
+```
+
+---
+
+## Version Compatibility
+
+Our SDK follows a versioning scheme aligned with the PermGuard server versions to ensure seamless integration. The versioning format is as follows:
+
+**SDK Versioning Format:** `x.y.z`
+
+- **x.y**: Indicates the compatible PermGuard server version.
+- **z**: Represents the SDK's patch or minor updates specific to that server version.
+
+**Compatibility Examples:**
+
+- `SDK Version 1.3.0` is compatible with `PermGuard Server 1.3`.
+- `SDK Version 1.3.1` includes minor improvements or bug fixes for `PermGuard Server 1.3`.
+
+**Incompatibility Example:**
+
+- `SDK Version 1.3.0` **may not be guaranteed** to be compatible with `PermGuard Server 1.4` due to potential changes introduced in server version `1.4`.
+
+**Important:** Ensure that the major and minor versions (`x.y`) of the SDK match those of your PermGuard server to maintain compatibility.
+
+---
+
+Created by [Nitro Agility](https://www.nitroagility.com/).

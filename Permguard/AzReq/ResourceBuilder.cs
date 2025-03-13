@@ -14,62 +14,47 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-using System.Collections.Generic;
-using Google.Protobuf.WellKnownTypes;
-
 namespace Permguard.AzReq
 {
     // ResourceBuilder is the builder for the resource object.
-    public class ResourceBuilder
+    public class ResourceBuilder: Builder
     {
-        private Permguard.Resource resource;
+        private readonly Resource resource;
 
         // Constructor to initialize ResourceBuilder with a type (kind).
         public ResourceBuilder(string kind)
         {
-            resource = new Permguard.Resource
+            resource = new Resource
             {
-                Type = kind
+                Type = kind,
+                Properties = new Dictionary<string, object>()
             };
-            resource.Properties = new Dictionary<string, object>();
         }
 
-        // WithID sets the id of the resource.
-        public ResourceBuilder WithID(string id)
+        // WithId sets the id of the resource.
+        public ResourceBuilder WithId(string id)
         {
-            resource.ID = id;
+            resource.Id = id;
             return this;
         }
 
         // WithProperty sets a property of the resource.
         public ResourceBuilder WithProperty(string key, object value)
         {
-            resource.Properties[key] = value;
+            if (resource.Properties != null) resource.Properties[key] = value;
             return this;
         }
 
         // Build constructs and returns the final Resource object.
-        public Permguard.Resource Build()
+        public Resource Build()
         {
-            var instance = new Permguard.Resource
+            var instance = new Resource
             {
-                ID = resource.ID,
+                Id = resource.Id,
                 Type = resource.Type,
                 Properties = DeepCopy(resource.Properties)
             };
             return instance;
-        }
-
-        // Helper method to deep copy the properties dictionary.
-        private Dictionary<string, object> DeepCopy(Dictionary<string, object> source)
-        {
-            var copy = new Dictionary<string, object>();
-            foreach (var key in source.Keys)
-            {
-                copy[key] = source[key];
-            }
-            return copy;
         }
     }
 }

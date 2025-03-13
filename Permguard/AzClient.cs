@@ -1,40 +1,46 @@
-using System.Text.Encodings.Web;
-using System.Text.Json;
+// Copyright 2025 Nitro Agility S.r.l.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// SPDX-License-Identifier: Apache-2.0
 using Grpc.Net.Client;
+using Permguard.AzReq;
+using Permguard.Grpc;
+using Policydecisionpoint;
 
 namespace Permguard;
 
 public class AzClient
 {
-    public AzConfig Config { get; set; }
-    
-    public bool LogJsonRequest { get; set; }
+    private readonly AzConfig config;
     
     public AzClient(AzConfig config)
     {
-        this.Config = config;
+        this.config = config;
     }
 
-    public AZResponse CheckAuth(AZRequest request)
+    public AzResponse? CheckAuth(AzRequest? request)
     {
-        if (this.Config == null)
+        if (config?.Endpoint == null)
         {
             throw new NullReferenceException("Please provide config");
         }
-        string urlString = $"{this.Config.Endpoint.Schema}://{this.Config.Endpoint.Endpoint}:{this.Config.Endpoint.Port}";
+        
+        var urlString = $"{config.Endpoint.Schema}://{config.Endpoint.Host}:{config.Endpoint.Port}";
         using var channel = GrpcChannel.ForAddress(urlString);
-        Policydecisionpoint.V1PDPService.V1PDPServiceClient client = new(channel);
-        var destination = MapService.MapAZRequestToGrpcAuthorizationCheckRequest(request);
-        if (this.LogJsonRequest)
-        {
-            var options = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            };
-            string json = JsonSerializer.Serialize(request, options);
-            Console.WriteLine(json);
-        }
+        var client = new V1PDPService.V1PDPServiceClient(channel);
+        var destination = MapService.MapAzRequestToGrpcAuthorizationCheckRequest(request);
         var result = client.AuthorizationCheck(destination);
-        return MapService.MapGrpcAuthorizationCheckResponseToAZResponse(result);
+        return MapService.MapGrpcAuthorizationCheckResponseToAzResponse(result);
     }
 }

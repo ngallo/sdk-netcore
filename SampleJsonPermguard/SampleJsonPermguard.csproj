@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <AssemblyName>SampleJsonPermguard</AssemblyName>
+        <RootNamespace>SampleJsonPermguard</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
