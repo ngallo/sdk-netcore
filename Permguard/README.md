@@ -23,7 +23,7 @@ Plase refer to the [Permguard Documentation](https://www.permguard.com/) for mor
 ## 📦 Install NuGet Packages
 
 ```bash
-dotnet add package Permguard --version 0.0.2
+dotnet add package Permguard
 ```
 
 ---
