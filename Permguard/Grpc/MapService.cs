@@ -292,7 +292,10 @@ namespace Permguard.Grpc
                     req.Context = FromDictionary(azRequest.Context);
                 }
 
-                req.Evaluations.Add(azRequest.Evaluations?.Select(MapEvaluationToGrpcEvaluationRequest).ToList());
+                if (azRequest.Evaluations != null)
+                {
+                    req.Evaluations.Add(azRequest.Evaluations.Select(MapEvaluationToGrpcEvaluationRequest).ToList());
+                }
                 return req;
             }
 
