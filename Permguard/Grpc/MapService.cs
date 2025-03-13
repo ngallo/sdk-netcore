@@ -1,5 +1,7 @@
 
 
+using Google.Protobuf.Collections;
+using Google.Protobuf.WellKnownTypes;
 using Permguard.AzReq;
 using Policydecisionpoint;
 using Action = Permguard.AzReq.Action;
@@ -16,6 +18,107 @@ namespace Permguard.Grpc
 {
     internal static class MapService
     {
+            public static Struct FromDictionary(Dictionary<string, object>? dict)
+    {
+        var structObj = new Struct();
+
+        if (dict == null) return structObj;
+        foreach (var (key, value) in dict)
+        {
+            var convertedValue = ConvertToValue(value);
+            structObj.Fields.Add(key, convertedValue);
+        }
+
+        return structObj;
+    }
+
+    public static RepeatedField<Struct> ToRepeatedField(List<Dictionary<string, object>?>? items)
+    {
+        var repeatedField = new RepeatedField<Struct>();
+
+        if (items != null)
+        {
+            foreach (var item in items)
+            {
+                repeatedField.Add(FromDictionary(item));
+            }
+        }
+
+        return repeatedField;
+    }
+    
+    private static Value ConvertToValue(object value)
+    {
+        switch (value)
+        {
+            case string str:
+                return new Value { StringValue = str };
+            case bool boolean:
+                return new Value { BoolValue = boolean };
+            case double dbl:
+                return new Value { NumberValue = dbl };
+            case int integer:
+                return new Value { NumberValue = integer };
+            case long l:
+                return new Value { NumberValue = l };
+            case DateTime dateTime:
+                return new Value { StringValue = dateTime.ToString("o") }; // Formato ISO 8601
+            case Dictionary<string, object> dict:
+                // Ricorsivamente converte i dizionari
+                return new Value { StructValue = ToStruct(dict) };
+            default:
+                return new Value(); 
+        }
+    }
+    
+    private static Struct ToStruct(Dictionary<string, object> dictionary)
+    {
+        var structObj = new Struct();
+
+        foreach (var kvp in dictionary)
+        {
+            structObj.Fields.Add(kvp.Key, ConvertToValue(kvp.Value));
+        }
+
+        return structObj;
+    }
+    
+    public static Dictionary<string, object> ToDictionary(Struct structObj)
+    {
+        var dict = new Dictionary<string, object>();
+    
+        if (structObj.Fields != null)
+        {
+            foreach (var kvp in structObj.Fields)
+            {
+                var value = ConvertFromValue(kvp.Value);
+                dict.Add(kvp.Key, value);
+            }
+        }
+
+        return dict;
+    }
+
+    private static object ConvertFromValue(Value value)
+    {
+        if (value.HasNullValue) 
+            return null;
+    
+        switch (value.KindCase)
+        {
+            case Value.KindOneofCase.StringValue:
+                return value.StringValue;
+            case Value.KindOneofCase.NumberValue:
+                return value.NumberValue;
+            case Value.KindOneofCase.BoolValue:
+                return value.BoolValue;
+            case Value.KindOneofCase.NullValue:
+                return null;
+            default:
+                throw new InvalidOperationException("Unsupported value type.");
+        }
+    }
+    
         private static Policydecisionpoint.PolicyStore? MapPolicyStoreToGrpcPolicyStore(PolicyStore? policyStore)
         {
             if (policyStore == null)
@@ -56,7 +159,7 @@ namespace Permguard.Grpc
             {
                 Schema = entities.Schema
             };
-            var results = Converter.ToRepeatedField(entities.Items);
+            var results = ToRepeatedField(entities.Items);
             foreach(var result in results)
             {
                 target.Items.Add(result);
@@ -77,7 +180,7 @@ namespace Permguard.Grpc
                 ID = subject.Id,
                 Type = subject.Type,
                 Source = string.IsNullOrEmpty(subject.Source) ? null : subject.Source,
-                Properties = subject.Properties == null ? null : Converter.FromDictionary(subject.Properties)
+                Properties = subject.Properties == null ? null : FromDictionary(subject.Properties)
             };
 
             return target;
@@ -94,7 +197,7 @@ namespace Permguard.Grpc
             {
                 ID = resource.Id,
                 Type = resource.Type,
-                Properties = resource.Properties == null ? null : Converter.FromDictionary(resource.Properties)
+                Properties = resource.Properties == null ? null : FromDictionary(resource.Properties)
             };
         }
 
@@ -108,7 +211,7 @@ namespace Permguard.Grpc
             return new Policydecisionpoint.Action
             {
                 Name = action.Name,
-                Properties = Grpc.Converter.FromDictionary(action.Properties)
+                Properties = FromDictionary(action.Properties)
             };
         }
 
@@ -125,7 +228,7 @@ namespace Permguard.Grpc
                 Subject = evaluation.Subject == null ? null : MapSubjectToGrpcSubject(evaluation.Subject),
                 Resource = evaluation.Resource == null ? null : MapResourceToGrpcResource(evaluation.Resource),
                 Action = evaluation.Action == null ? null : MapActionToGrpcAction(evaluation.Action),
-                Context = evaluation.Context == null ? null : Grpc.Converter.FromDictionary(evaluation.Context)
+                Context = evaluation.Context == null ? null : FromDictionary(evaluation.Context)
             };
 
             return target;
@@ -186,7 +289,7 @@ namespace Permguard.Grpc
 
             if (azRequest.Context != null)
             {
-                req.Context = Converter.FromDictionary(azRequest.Context);
+                req.Context = FromDictionary(azRequest.Context);
             }
 
             req.Evaluations.Add(azRequest.Evaluations.Select(MapEvaluationToGrpcEvaluationRequest).ToList());
