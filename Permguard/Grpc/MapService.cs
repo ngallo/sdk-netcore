@@ -1,5 +1,6 @@
 
 
+using System.Collections;
 using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 using Permguard.AzReq;
@@ -49,6 +50,10 @@ namespace Permguard.Grpc
 
         private static Value ConvertToValue(object value)
         {
+            if (value is IEnumerable enumerable && !(value is string))
+            {
+                return ConvertIEnumerableToValue(enumerable);
+            }
             switch (value)
             {
                 case string str:
@@ -69,6 +74,56 @@ namespace Permguard.Grpc
                 default:
                     return new Value(); 
             }
+        }
+        
+        private static Value ConvertIEnumerableToValue(IEnumerable enumerable)
+        {
+            var enumerator = enumerable.GetEnumerator();
+        
+            // Lista vuota
+            if (!enumerator.MoveNext())
+                return Value.ForList();
+
+            var firstElement = enumerator.Current;
+            var elementType = firstElement?.GetType();
+
+            // Caso speciale: lista di byte (considerata come base64 per i byte[])
+            if (elementType == typeof(byte))
+            {
+                var byteArray = enumerable.Cast<byte>().ToArray();
+                return Value.ForString(Convert.ToBase64String(byteArray));
+            }
+
+            // Crea una lista Value per elementi non nulli
+            var values = new List<Value>();
+            do
+            {
+                if (enumerator.Current != null)
+                {
+                    values.Add(ConvertToValue(enumerator.Current));
+                }
+                else
+                {
+                    values.Add(Value.ForNull());
+                }
+            } 
+            while (enumerator.MoveNext());
+
+            return new Value
+            {
+                ListValue = new ListValue { Values = { values } }
+            };
+        }
+        
+        private static Value ConvertTypedList<T>(IEnumerable<T> list, Func<T, Value> converter)
+        {
+            return new Value
+            {
+                ListValue = new ListValue
+                {
+                    Values = { list.Select(converter) }
+                }
+            };
         }
 
         private static Struct ToStruct(Dictionary<string, object> dictionary)
