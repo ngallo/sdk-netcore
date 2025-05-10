@@ -1,10 +1,10 @@
 # Permguard DotNet Core SDK
 
-[![GitHub License](https://img.shields.io/github/license/permguard/permguard-netcore)](https://github.com/permguard/permguard-netcore?tab=Apache-2.0-1-ov-file#readme)
+[![GitHub License](https://img.shields.io/github/license/permguard/sdk-netcore)](https://github.com/permguard/sdk-netcore?tab=Apache-2.0-1-ov-file#readme)
 [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/permguard)](https://x.com/intent/follow?original_referer=https%3A%2F%2Fdeveloper.x.com%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5ETwitterDev&screen_name=Permguard)
 
 [![Documentation](https://img.shields.io/website?label=Docs&url=https%3A%2F%2Fwww.permguard.com%2F)](https://www.permguard.com/)
-[![Build, test and publish the artifacts](https://github.com/permguard/permguard-netcore/actions/workflows/permguard-netcore-ci.yml/badge.svg)](https://github.com/permguard/permguard-netcore/actions/workflows/permguard-netcore-ci.yml)
+[![Build, test and publish the artifacts](https://github.com/permguard/sdk-netcore/actions/workflows/sdk-netcore-ci.yml/badge.svg)](https://github.com/permguard/sdk-netcore/actions/workflows/sdk-netcore-ci.yml)
 
 
 The Permguard DotNet Core SDK provides a simple and flexible client to perform authorization checks against a Permguard Policy Decision Point (PDP) service using gRPC.

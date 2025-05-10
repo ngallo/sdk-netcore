@@ -13,7 +13,7 @@
         <PackageProjectUrl>www.permguard.com</PackageProjectUrl>
         <PackageLicenseUrl>https://www.permguard.com/docs/0.0.x/legal-licenses/third-party-technologies/</PackageLicenseUrl>
         <PackageIcon>symbol.png</PackageIcon>
-        <RepositoryUrl>https://github.com/permguard/permguard-netcore</RepositoryUrl>
+        <RepositoryUrl>https://github.com/permguard/sdk-netcore</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>Scurity</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
