@@ -35,17 +35,17 @@ try
         .Build();
 
     // Create a new resource
-    var resource = new ResourceBuilder("MagicFarmacia::Platform::Subscription")
+    var resource = new ResourceBuilder("ZTMedFlow::Platform::Subscription")
         .WithId("e3a786fd07e24bfa95ba4341d3695ae8")
         .WithProperty("isEnabled", true)
         .Build();
     
     // Create ations
-    var actionView = new ActionBuilder("MagicFarmacia::Platform::Action::create")
+    var actionView = new ActionBuilder("ZTMedFlow::Platform::Action::create")
         .WithProperty("isEnabled", true)
         .Build();
     
-    var actionCreate = new ActionBuilder("MagicFarmacia::Platform::Action::create")
+    var actionCreate = new ActionBuilder("ZTMedFlow::Platform::Action::create")
         .WithProperty("isEnabled", false)
         .Build();
     
@@ -71,7 +71,7 @@ try
         {
             { "uid", new Dictionary<string,object>
                 {
-                    { "type", "MagicFarmacia::Platform::BranchInfo" },
+                    { "type", "ZTMedFlow::Platform::BranchInfo" },
                     { "id", "subscription" }
                 }
             },

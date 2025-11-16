@@ -54,7 +54,7 @@ try
         {
             { "uid", new Dictionary<string,object>
                 {
-                    { "type", "MagicFarmacia::Platform::BranchInfo" },
+                    { "type", "ZTMedFlow::Platform::BranchInfo" },
                     { "id", "subscription" }
                 }
             },
@@ -67,8 +67,8 @@ try
     var request = new AzAtomicRequestBuilder(285374414806,
             "f81aec177f8a44a48b7ceee45e05507f",
             "platform-creator",
-            "MagicFarmacia::Platform::Subscription",
-            "MagicFarmacia::Platform::Action::create")
+            "ZTMedFlow::Platform::Subscription",
+            "ZTMedFlow::Platform::Action::create")
         // RequestID
         .WithRequestId("31243")
         // Principal
