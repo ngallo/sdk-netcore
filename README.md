@@ -46,7 +46,7 @@ try
     // Create the Principal
     var principal = new PrincipalBuilder("amy.smith@acmecorp.com")
         .WithSource("keycloak")
-        .WithKind("user")
+        .WithType("user")
         .Build();
 
     // Create the entities

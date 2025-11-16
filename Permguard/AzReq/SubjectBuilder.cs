@@ -37,8 +37,8 @@ namespace Permguard.AzReq
             };
         }
 
-        // WithKind sets the kind of the subject.
-        public SubjectBuilder WithKind(string kind)
+        // WithType sets the kind of the subject.
+        public SubjectBuilder WithType(string kind)
         {
             subject.Type = kind;
             return this;

@@ -25,12 +25,12 @@ try
     // Create the Principal
     var principal = new PrincipalBuilder("amy.smith@acmecorp.com")
         .WithSource("keycloak")
-        .WithKind("user").Build();
+        .WithType("user").Build();
     
     // Create a new subject
     var subject = new SubjectBuilder("platform-creator")
         .WithSource("keycloak")
-        .WithKind("workload")
+        .WithType("workload")
         .WithProperty("isSuperUser", true)
         .Build();
 

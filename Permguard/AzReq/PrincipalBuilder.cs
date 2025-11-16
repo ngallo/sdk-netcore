@@ -30,8 +30,8 @@ namespace Permguard.AzReq
             };
         }
 
-        // WithKind sets the kind of the principal.
-        public PrincipalBuilder WithKind(string kind)
+        // WithType sets the kind of the principal.
+        public PrincipalBuilder WithType(string kind)
         {
             principal.Type = kind;
             return this;
