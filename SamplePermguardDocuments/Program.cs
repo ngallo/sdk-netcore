@@ -22,7 +22,7 @@ var request = new AzAtomicRequestBuilder(981332208784,
     // Entities
     .WithEntitiesItems("cedar", new List<Dictionary<string, object>?>())
     // Subject
-    .WithSubjectKind("workload")
+    .WithSubjectType("workload")
     .WithSubjectSource("netcore")
     .WithSubjectProperty("groups", roles)
     // Resource

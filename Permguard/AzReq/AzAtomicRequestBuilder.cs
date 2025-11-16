@@ -66,8 +66,8 @@ namespace Permguard.AzReq
             return this;
         }
 
-        // WithSubjectKind sets the kind of the subject for the AzRequest.
-        public AzAtomicRequestBuilder WithSubjectKind(string kind)
+        // WithSubjectType sets the kind of the subject for the AzRequest.
+        public AzAtomicRequestBuilder WithSubjectType(string kind)
         {
             azSubjectBuilder.WithKind(kind);
             return this;
